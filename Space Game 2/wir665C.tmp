@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://by6s3c4ctyewl"]
+
+[ext_resource type="Script" path="res://Wire.gd" id="1_torg2"]
+
+[node name="Wire" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("1_torg2")

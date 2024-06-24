@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://b067cv2jqyfww"]
+
+[ext_resource type="Script" path="res://game_area.gd" id="1_83rih"]
+[ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://relay.tscn" id="1_4287h"]
+[ext_resource type="PackedScene" uid="uid://dlnfaliclscl4" path="res://gen.tscn" id="3_q68f6"]
+[ext_resource type="PackedScene" uid="uid://dqtc13uqjsv45" path="res://turret.tscn" id="4_pvicg"]
+
+[node name="GameArea" type="Node2D"]
+script = ExtResource("1_83rih")
+
+[node name="Relay4" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-227, -3)
+
+[node name="Relay7" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-293, -1)
+
+[node name="Relay11" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-362, -11)
+
+[node name="Relay12" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-95, -46)
+
+[node name="Relay13" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-109, 19)
+
+[node name="Relay14" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-161, -22)
+
+[node name="Relay19" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-176, 33)
+
+[node name="Relay21" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-322, 53)
+
+[node name="Relay22" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-249, 43)
+
+[node name="gen" parent="." instance=ExtResource("3_q68f6")]
+position = Vector2(-428, -36)
+
+[node name="turret2" parent="." instance=ExtResource("4_pvicg")]
+position = Vector2(-52, -102)
+
+[node name="Camera2D" type="Camera2D" parent="."]

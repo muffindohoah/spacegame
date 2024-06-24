@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b067cv2jqyfww"]
+
+[ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://relay.tscn" id="1_4287h"]
+
+[node name="GameArea" type="Node2D"]
+
+[node name="Relay" parent="." instance=ExtResource("1_4287h")]
+
+[node name="Relay2" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(56, 82)

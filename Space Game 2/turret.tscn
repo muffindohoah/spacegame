@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqtc13uqjsv45"]
+
+[ext_resource type="Script" path="res://turret.gd" id="1_6281m"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://connector.tscn" id="1_ikl35"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://collision.tscn" id="2_iccs0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xvxp4"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogpxy"]
+radius = 19.4165
+
+[node name="turret" type="Node2D"]
+script = ExtResource("1_6281m")
+
+[node name="Connector" parent="." instance=ExtResource("1_ikl35")]
+
+[node name="CollisionShape2D" parent="Connector" index="0"]
+shape = SubResource("CircleShape2D_xvxp4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.92, 0.8372, 0.506, 1)
+
+[node name="Collision" parent="." instance=ExtResource("2_iccs0")]
+
+[node name="CollisionShape2D" parent="Collision" index="0"]
+shape = SubResource("CircleShape2D_ogpxy")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = -1
+offset_left = 18.0
+offset_top = 9.0
+offset_right = 40.0
+offset_bottom = 19.0
+color = Color(1, 0.23, 0.23, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 1.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = -7.0
+color = Color(0.1118, 0.43, 0.196653, 1)
+
+[connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
+
+[editable path="Connector"]
+[editable path="Collision"]

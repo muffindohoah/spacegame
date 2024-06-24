@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://pa85rsijh4bm"]
+
+[node name="Collision" type="Area2D" groups=["collider"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
