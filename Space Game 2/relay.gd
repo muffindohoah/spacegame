@@ -1,7 +1,7 @@
 extends Node2D
 
 var ConnectedNodes = {}
-var Distances = {"power":[]}
+var Distances = {"Power":9}
  
 @onready var DetectionArea = $Connector
 @onready var DetectionAreaShape = $Connector/CollisionShape2D
@@ -15,7 +15,6 @@ func _ready():
 	DetectionAreaShape.shape.radius = DetectionRadius
 
 func connectNode(node):
-	
 	
 	var WireScene = load("res://wire.tscn").instantiate()
 	WireScene.WiredFrom = self
@@ -38,9 +37,11 @@ func setDistanceFrom(fromlog, distance):
 	var distanceFrom = distance + 1
 	$Label.text = str(distanceFrom)
 	#cache the distance between you and the from 
+	print(fromlog[0])
+	
 	if fromlog[0].is_in_group("power"):
 		
-		Distances["power"].append(distanceFrom)
+		Distances.Power = distanceFrom
 	
 	var senders = fromlog
 	senders.append(self)
@@ -74,12 +75,43 @@ func relaysetDistance(fromlog, distance):
 
 
 func send(data):
-	for i in ConnectedNodes.is_in_group("relay"):
-		if data.To == "Power":
-			for j in ConnectedNodes[i].Distances.Power.size():
-				var possibleRelays = ConnectedNodes[i].Distances.Power
-				possibleRelays.sort()
-				relaySend(possibleRelays.front(), data)
+	
+	var possibleRelays = {}
+	
+	for i in ConnectedNodes.size():
+		if ConnectedNodes[i].is_in_group("relay"):
+			if data.To == "Power":
+				
+				
+				
+				if ConnectedNodes[i].Distances.Power < self.Distances.Power:
+					
+					possibleRelays[ConnectedNodes[i].Distances.Power] = []
+					possibleRelays[ConnectedNodes[i].Distances.Power].append([ConnectedNodes[i]])
+				
+				
+				
+				
+		if ConnectedNodes[i].is_in_group("power"):
+			if ConnectedNodes[i].StoredPower >= data.Power:
+				relaySend(ConnectedNodes[i], data)
+				print("send to mama", data.From)
+				return
+	
+	var closestRelay
+	
+	for j in possibleRelays.values():
+		closestRelay = 100
+		var sortableRelays = possibleRelays.values()
+		sortableRelays.sort()
+		
+		closestRelay = sortableRelays.front()
+	
+	
+	#for j in possibleRelays[closestRelay].values():
+	if closestRelay != null:
+		relaySend(closestRelay[0][0], data)
+
 
 
 func relaySend(to, data):

@@ -31,11 +31,23 @@ color = Color(0.8, 0.456, 0.32, 1)
 shape = SubResource("CircleShape2D_aughg")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.278
 one_shot = true
 autostart = true
 
+[node name="generatePower" type="Timer" parent="."]
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -43.0
+offset_right = 35.0
+offset_bottom = -20.0
+text = "0"
+
 [connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="generatePower" to="." method="_on_generate_power_timeout"]
 
 [editable path="Connector"]
 [editable path="Collision"]
