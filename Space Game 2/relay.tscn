@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ehyn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ly8y"]
-radius = 69.0652
+radius = 88.0
 
 [node name="Relay" type="Node2D" groups=["node", "relay"]]
 script = ExtResource("1_2fnlo")

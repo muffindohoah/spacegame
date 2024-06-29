@@ -1,33 +1,17 @@
-extends Node2D
+extends BasicNode
 
-var ConnectedNodes = {}
-var Distances = {"Power":9}
+var Distances = {"Power":[]}
  
 @onready var DetectionArea = $Connector
 @onready var DetectionAreaShape = $Connector/CollisionShape2D
 
 var DetectionRadius = 88
 
-#each node has to send to more then one, figure that out
+#Each node has to send to more then one, figure that out
 
-# Called when the node enters the scene tree for the first time.
+#Called when the node enters the scene tree for the first time.
 func _ready():
 	DetectionAreaShape.shape.radius = DetectionRadius
-
-func connectNode(node):
-	
-	var WireScene = load("res://wire.tscn").instantiate()
-	WireScene.WiredFrom = self
-	WireScene.WiredTo = node
-	get_parent().add_child(WireScene)
-	
-	ConnectedNodes[ConnectedNodes.size()] = node
-
-func disconnectNode(node):
-	if ConnectedNodes.has(node):
-		ConnectedNodes.erase(node)
-	else:
-		print("invalid node disconnection")
 
 func setDistanceFrom(fromlog, distance):
 	if fromlog.has(self) == true:
@@ -37,11 +21,11 @@ func setDistanceFrom(fromlog, distance):
 	var distanceFrom = distance + 1
 	$Label.text = str(distanceFrom)
 	#cache the distance between you and the from 
-	print(fromlog[0])
+	#print(fromlog[0])
 	
 	if fromlog[0].is_in_group("power"):
 		
-		Distances.Power = distanceFrom
+		Distances.Power.append(distanceFrom)
 	
 	var senders = fromlog
 	senders.append(self)
@@ -50,7 +34,7 @@ func setDistanceFrom(fromlog, distance):
 
 func relaysetDistance(fromlog, distance):
 	
-	var prospectiveConnectors = ConnectedNodes.values()
+	var prospectiveConnectors = ConnectedNodes.duplicate()
 	
 	prospectiveConnectors.erase(prospectiveConnectors.find(self))
 	
@@ -67,7 +51,7 @@ func relaysetDistance(fromlog, distance):
 				prospectiveConnectors.erase(prospectiveConnectors[Connector])
 	
 	
-	for Connector in range(prospectiveConnectors.size()):
+	for Connector in prospectiveConnectors.size():
 		
 		if prospectiveConnectors[Connector].is_in_group("relay"):
 			
@@ -75,46 +59,44 @@ func relaysetDistance(fromlog, distance):
 
 
 func send(data):
-	
+	if data.Couriers.has(self):
+		return
+	data.Couriers.append(self)
 	var possibleRelays = {}
-	
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i].is_in_group("relay"):
 			if data.To == "Power":
 				
 				
-				
-				if ConnectedNodes[i].Distances.Power < self.Distances.Power:
+				print(ConnectedNodes[i].Distances.Power.min(), "you<->me", self.Distances.Power.min())
+				if ConnectedNodes[i].Distances.Power.min() < self.Distances.Power.min():
 					
 					possibleRelays[ConnectedNodes[i].Distances.Power] = []
 					possibleRelays[ConnectedNodes[i].Distances.Power].append([ConnectedNodes[i]])
-				
-				
-				
-				
+			
+		var closestRelay
+		var sortableRelays = possibleRelays.keys()
+		if sortableRelays.min():
+			closestRelay = (possibleRelays[sortableRelays.min()])[0][0]
+		
+		
+		if closestRelay != null && !data.Couriers.has(closestRelay):
+			call_deferred("relaySend", closestRelay, data)
+		
+		
+		
 		if ConnectedNodes[i].is_in_group("power"):
 			if ConnectedNodes[i].StoredPower >= data.Power:
 				relaySend(ConnectedNodes[i], data)
 				print("send to mama", data.From)
 				return
-	
-	var closestRelay
-	
-	for j in possibleRelays.values():
-		closestRelay = 100
-		var sortableRelays = possibleRelays.values()
-		sortableRelays.sort()
-		
-		closestRelay = sortableRelays.front()
-	
-	
-	#for j in possibleRelays[closestRelay].values():
-	if closestRelay != null:
-		relaySend(closestRelay[0][0], data)
+		elif !closestRelay:
+			data.From.deadEnd(self)
 
 
 
 func relaySend(to, data):
+	print(str(to))
 	to.send(data)
 
 

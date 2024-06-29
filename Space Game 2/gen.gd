@@ -1,6 +1,4 @@
-extends Node2D
-
-var ConnectedNodes = {}
+extends BasicNode
 
 var ProductionRate = 3
 
@@ -23,6 +21,13 @@ func send(data):
 	returnRequest(data)
 
 func returnRequest(data):
+	if self != data.PowerParent && data.PowerParent != null:
+		return
+	else:
+		print("WHOS YOUR DADDY")
+		data.PowerParent = self
+		data.ParentGateway = ConnectedNodes.duplicate(false)
+	
 	var ReturnForm = BlankReturnForm
 	ReturnForm.To = data.From
 	
@@ -39,18 +44,6 @@ func updateDistances():
 		if ConnectedNodes[i].has_method("setDistanceFrom"):
 			ConnectedNodes[i].setDistanceFrom([self], 0)
 
-func connectNode(node):
-	print("gen connected to")
-	
-	var WireScene = load("res://wire.tscn").instantiate()
-	WireScene.WiredFrom = self
-	WireScene.WiredTo = node
-	get_parent().add_child(WireScene)
-	
-	ConnectedNodes[ConnectedNodes.size()] = node
-	
-	print(ConnectedNodes)
-
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()
 	if area.is_in_group("collider") && area.get_parent() != self:
@@ -60,7 +53,6 @@ func _on_connector_area_entered(area):
 
 func _on_timer_timeout():
 	updateDistances()
-
 
 func _on_generate_power_timeout():
 	StoredPower += 1

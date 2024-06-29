@@ -1,17 +1,19 @@
-extends Node2D
+extends BasicNode
 
 var StoredPower = 5
-var PowerThreshold = 1
+var StoredPowerThreshold = 5
+var PoweredThreshold = 1
 var Powered = 0
 
 @export var PowerFrequency : float = 1
 
-var ConnectedNodes = {}
-
 var RequestForm = {
 	"From":self,
 	"To":"Power",
-	"Power":1
+	"Power":1,
+	"PowerParent":null,
+	"ParentGateway":null,
+	"Couriers":[]
 	}
 
 func _ready():
@@ -23,7 +25,7 @@ func _ready():
 func _physics_process(delta):
 	$Label.text = str(StoredPower)
 	
-	if StoredPower >= PowerThreshold:
+	if StoredPower >= PoweredThreshold:
 		Powered = 1
 	else:
 		Powered = 0
@@ -33,33 +35,31 @@ func _physics_process(delta):
 		$Pivot.rotation_degrees += 1.5
 
 func getPower():
-	
-	request()
-	print("need power")
+	RequestForm.Couriers = []
 	StoredPower -= 1
+	if StoredPower < StoredPowerThreshold:
+		requestPower()
+	#print("need power")
 	
 
 func receive(data):
-	print("Received Power")
+	print("Received Power" + str(data.Power))
 	StoredPower += data.Power
 
-func request():
+func requestPower():
+	
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i].is_in_group("relay"):
-			ConnectedNodes[i].send(RequestForm)
+			print("requestingpower")
+			var SendingForm = RequestForm.duplicate(false)
+			ConnectedNodes[i].send(SendingForm)
 			return
 
-func connectNode(node):
-	print("turret connected to")
-	
-	var WireScene = load("res://wire.tscn").instantiate()
-	WireScene.WiredFrom = self
-	WireScene.WiredTo = node
-	get_parent().add_child(WireScene)
-	
-	ConnectedNodes[ConnectedNodes.size()] = node
-	
-	print(ConnectedNodes)
+func deadEnd(from):
+	if RequestForm.ParentGateway:
+		if RequestForm.ParentGateway.has(from):
+			print("cant find mama")
+			RequestForm.PowerParent = null
 
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()
