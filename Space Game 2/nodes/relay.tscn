@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsthu86g5vuve"]
 
-[ext_resource type="Script" path="res://relay.gd" id="1_2fnlo"]
-[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://connector.tscn" id="2_i085r"]
-[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://collision.tscn" id="3_ym34a"]
+[ext_resource type="Script" path="res://nodes/relay.gd" id="1_2fnlo"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_i085r"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_ym34a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ehyn"]
 

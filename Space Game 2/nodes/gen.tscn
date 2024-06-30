@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlnfaliclscl4"]
 
-[ext_resource type="Script" path="res://gen.gd" id="1_mh6eq"]
-[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://connector.tscn" id="2_r3jqm"]
-[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://collision.tscn" id="3_jyja2"]
+[ext_resource type="Script" path="res://nodes/gen.gd" id="1_mh6eq"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_r3jqm"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_jyja2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11f7k"]
 radius = 68.0661

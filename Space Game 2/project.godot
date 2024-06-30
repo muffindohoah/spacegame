@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Space Game 2"
-run/main_scene="res://game_area.tscn"
+run/main_scene="res://game/game_area.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Utils="*res://utils.gd"
+Utils="*res://game/utils.gd"
 
 [display]
 

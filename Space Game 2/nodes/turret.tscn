@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqtc13uqjsv45"]
 
-[ext_resource type="Script" path="res://turret.gd" id="1_6281m"]
-[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://connector.tscn" id="1_ikl35"]
-[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://collision.tscn" id="2_iccs0"]
+[ext_resource type="Script" path="res://nodes/turret.gd" id="1_6281m"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="1_ikl35"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="2_iccs0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xvxp4"]
 radius = 64.0

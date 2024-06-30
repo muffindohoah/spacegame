@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxsvihcew6epd"]
-
-[ext_resource type="PackedScene" uid="uid://uqktgp8ano2r" path="res://gameUI.tscn" id="1_b1je0"]
-
-[node name="gameview" type="Camera2D"]
-position = Vector2(577, 324)
-
-[node name="UI" parent="." instance=ExtResource("1_b1je0")]

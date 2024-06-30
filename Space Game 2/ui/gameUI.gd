@@ -16,7 +16,7 @@ func _process(delta):
 
 func spawnNodeUI():
 	for i in Utils.NodeDB.keys():
-		var NodeUIElement = load("res://nodeUIelement.tscn").instantiate()
+		var NodeUIElement = load("res://ui/nodeUIelement.tscn").instantiate()
 		NodeUIElement.focusNode = i
 		
 		selectableNodesContainer.add_child(NodeUIElement)
