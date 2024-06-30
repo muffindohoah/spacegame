@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b067cv2jqyfww"]
+[gd_scene load_steps=6 format=3 uid="uid://b067cv2jqyfww"]
 
 [ext_resource type="Script" path="res://game_area.gd" id="1_83rih"]
 [ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://relay.tscn" id="1_4287h"]
 [ext_resource type="PackedScene" uid="uid://dlnfaliclscl4" path="res://gen.tscn" id="3_q68f6"]
 [ext_resource type="PackedScene" uid="uid://dqtc13uqjsv45" path="res://turret.tscn" id="4_pvicg"]
+[ext_resource type="PackedScene" uid="uid://dxsvihcew6epd" path="res://gameview.tscn" id="5_425xm"]
 
 [node name="GameArea" type="Node2D"]
 script = ExtResource("1_83rih")
 
 [node name="Relay4" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(15, -48)
+position = Vector2(129, -67)
 
 [node name="Relay7" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-313, 5)
@@ -50,4 +51,5 @@ position = Vector2(-78, 3)
 [node name="turret3" parent="." instance=ExtResource("4_pvicg")]
 position = Vector2(-320, -195)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="gameview" parent="." instance=ExtResource("5_425xm")]
+position = Vector2(-115, -30)

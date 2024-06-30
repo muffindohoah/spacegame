@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cejv38d7lmges"
-path="res://.godot/imported/diags2.png-3ad0e4c68a2af359ead886b6bff1377e.ctex"
+path="res://.godot/imported/diags2.png-5b65413b2b4050db206de7be47b500c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test/diags2.png"
-dest_files=["res://.godot/imported/diags2.png-3ad0e4c68a2af359ead886b6bff1377e.ctex"]
+source_file="res://diags2.png"
+dest_files=["res://.godot/imported/diags2.png-5b65413b2b4050db206de7be47b500c5.ctex"]
 
 [params]
 

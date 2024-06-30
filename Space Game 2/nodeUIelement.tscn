@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy1x871ulenga"]
+
+[ext_resource type="Script" path="res://nodeUIelement.gd" id="1_43l0w"]
+[ext_resource type="Texture2D" uid="uid://drjoeyt7e6kwg" path="res://addons/sprite_painter/graphics/diamond_shape_2d.svg" id="1_c321o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l28oy"]
+bg_color = Color(0.138, 0.151433, 0.2, 1)
+
+[node name="Panel" type="PanelContainer"]
+custom_minimum_size = Vector2(110, 150)
+anchors_preset = -1
+anchor_right = 0.095
+anchor_bottom = 0.231
+offset_right = 0.559998
+offset_bottom = 3.312
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l28oy")
+script = ExtResource("1_43l0w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="PreviewTextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_c321o")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Figglebottom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4704, 0.50176, 0.56, 1)
+theme_override_font_sizes/font_size = 12
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
