@@ -50,7 +50,6 @@ func _on_connector_area_entered(area):
 		connectNode(prospectiveNode)
 		updateDistances()
 
-
 func _on_timer_timeout():
 	updateDistances()
 

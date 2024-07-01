@@ -1,12 +1,9 @@
 extends BasicNode
 
-var StoredPower = 5
-var StoredPowerThreshold = 5
-var PoweredThreshold = 1
-var Powered = 0
+var matureNode = null
 
-@export var PowerFrequency : float = 1
-
+var StoredPower = 0
+var PowerGoal = 15
 var RequestForm = {
 	"From":self,
 	"To":"Power",
@@ -16,49 +13,43 @@ var RequestForm = {
 	"Couriers":[]
 	}
 
+@onready var progressbar = $ColorRect/ProgressBar
+
 func _ready():
 	
-	$PowerTimer.wait_time = PowerFrequency
-	
-	Utils.Demanders.append(self)
+	progressbar.max_value = PowerGoal
 
-func _physics_process(delta):
-	$Label.text = str(StoredPower)
-	
-	if StoredPower >= PoweredThreshold:
-		Powered = 1
-	else:
-		Powered = 0
-	
-	if Powered:
-		$Pivot/barrel.color.b += 1
-		$Pivot.rotation_degrees += 1.5
+func _process(delta):
+	pass
+
 
 func getPower():
-	RequestForm.Couriers = []
-	StoredPower -= 1
-	if StoredPower < StoredPowerThreshold:
+	RequestForm.Couriers.clear()
+	
+	if StoredPower < PowerGoal:
 		requestPower()
-	#print("need power")
+	else:
+		completeNode()
 	
-
-func receive(data):
-	
-	StoredPower += data.Power
 
 func requestPower():
 	
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i].is_in_group("relay"):
-			
+			print("SOS buildstuff",RequestForm.Couriers)
 			var SendingForm = RequestForm.duplicate(false)
 			ConnectedNodes[i].send(SendingForm)
-			return
+
+func receive(data):
+	print("Received Buildstuff" + str(data.Power))
+	StoredPower += data.Power
+	progressbar.value = StoredPower
+	
 
 func deadEnd(from):
 	if RequestForm.ParentGateway:
 		if RequestForm.ParentGateway.has(from):
-			print("cant find mama")
+			print("cant find builddad")
 			RequestForm.PowerParent = null
 
 func _on_connector_area_entered(area):
@@ -66,6 +57,9 @@ func _on_connector_area_entered(area):
 	if area.is_in_group("collider") && area.get_parent() != self:
 		connectNode(prospectiveNode)
 
+func completeNode():
+	print("completion")
 
-func _on_power_timer_timeout():
+func _on_timer_timeout():
+	print("need buildstuff")
 	getPower()

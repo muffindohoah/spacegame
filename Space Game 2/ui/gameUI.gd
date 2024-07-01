@@ -5,22 +5,24 @@ extends CanvasLayer
 @onready var AnimPlayer = $AnimationPlayer
 @onready var scoreLabel = $Label
 
-var isPanel = false : set = panelSet, get = panelGet
+var isPanel = false : set = panelSet
 
 func _ready():
 	AnimPlayer.play("RESET")
 	spawnNodeUI()
 
-func _process(delta):
-	pass
-
 func spawnNodeUI():
 	for i in Utils.NodeDB.keys():
-		var NodeUIElement = load("res://ui/nodeUIelement.tscn").instantiate()
-		NodeUIElement.focusNode = i
-		
-		selectableNodesContainer.add_child(NodeUIElement)
-		
+		var nodeUIelement = load("res://ui/nodeUIelement.tscn").instantiate()
+		nodeUIelement.focusNode = i
+		nodeUIelement.nodeSelected.connect(nodeUIselected)
+		selectableNodesContainer.add_child(nodeUIelement)
+
+func nodeUIselected(node):
+	Utils.SelectedNode = node
+	Utils.NodeSelected.emit(node, true)
+	print("nodeUIselected")
+	togglePanel()
 
 func panelSet(value):
 	if value:
@@ -29,10 +31,9 @@ func panelSet(value):
 		AnimPlayer.play("slidingDown")
 	isPanel = value
 
-func panelGet():
-	return isPanel
+func togglePanel():
+	isPanel = !isPanel
 
 func _on_popup_button_pressed():
-	
-	isPanel = !isPanel
-	
+	togglePanel()
+
