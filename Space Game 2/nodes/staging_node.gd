@@ -48,13 +48,13 @@ func getPower():
 func requestPower():
 	
 	for i in ConnectedNodes.size():
-		if ConnectedNodes[i].is_in_group("relay"):
-			print("SOS buildstuff",RequestForm.Couriers)
+		if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
+			
 			var SendingForm = RequestForm.duplicate(false)
 			ConnectedNodes[i].send(SendingForm)
 
 func receive(data):
-	print("Received Buildstuff" + str(data.Power))
+	
 	StoredPower += data.Power
 	progressbar.value = StoredPower
 	
@@ -62,7 +62,7 @@ func receive(data):
 func deadEnd(from):
 	if RequestForm.ParentGateway:
 		if RequestForm.ParentGateway.has(from):
-			print("cant find builddad")
+			
 			RequestForm.PowerParent = null
 
 func _on_connector_area_entered(area):
@@ -78,11 +78,10 @@ func completeNode():
 	for i in ConnectedNodes:
 		butterfly.connectNode(i)
 	butterfly.global_position = self.global_position
+	queue_free()
 	
 	Utils.WebChanged.emit()
-	self.queue_free()
-	
 
 func _on_timer_timeout():
-	print("need buildstuff")
+	
 	getPower()

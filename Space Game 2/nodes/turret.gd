@@ -36,10 +36,10 @@ func _physics_process(delta):
 
 func getPower():
 	RequestForm.Couriers.clear()
-	StoredPower -= 1
+	if StoredPower > 0:
+		StoredPower -= 1
 	if StoredPower < StoredPowerThreshold:
 		requestPower()
-	#print("need power")
 	
 
 func receive(data):
@@ -49,17 +49,18 @@ func receive(data):
 func requestPower():
 	
 	for i in ConnectedNodes.size():
-		if ConnectedNodes[i].is_in_group("relay"):
-			
-			var SendingForm = RequestForm.duplicate(false)
-			ConnectedNodes[i].send(SendingForm)
-			return
+		if ConnectedNodes[i] != null:
+			if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
+				var SendingForm = RequestForm.duplicate(false)
+				ConnectedNodes[i].call_deferred("send", RequestForm)
+				
 
 func deadEnd(from):
-	if RequestForm.ParentGateway:
-		if RequestForm.ParentGateway.has(from):
-			print("cant find mama")
-			RequestForm.PowerParent = null
+	print(RequestForm.PowerParent, from)
+	if RequestForm.PowerParent == from or RequestForm.ParentGateway.has(from):
+		print("cant find mama")
+		
+		RequestForm.PowerParent = null
 
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()

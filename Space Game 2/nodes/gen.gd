@@ -25,7 +25,7 @@ func returnRequest(data):
 	if self != data.PowerParent && data.PowerParent != null:
 		return
 	else:
-		print("WHOS YOUR DADDY")
+		
 		data.PowerParent = self
 		data.ParentGateway = ConnectedNodes.duplicate(false)
 	

@@ -21,7 +21,7 @@ func setDistanceFrom(fromlog, distance):
 	var distanceFrom = distance + 1
 	$Label.text = str(distanceFrom)
 	#cache the distance between you and the from 
-	#print(fromlog[0])
+	
 	
 	if fromlog[0].is_in_group("power"):
 		
@@ -59,6 +59,7 @@ func relaysetDistance(fromlog, distance):
 
 
 func send(data):
+	
 	if data.Couriers.has(self):
 		return
 	data.Couriers.append(self)
@@ -70,11 +71,10 @@ func send(data):
 					"Power":
 						
 						
-						print(ConnectedNodes[i].Distances.Power.min(), "you<->me", self.Distances.Power.min())
 						if ConnectedNodes[i].Distances.Power.min() < self.Distances.Power.min():
 							
-							possibleRelays[ConnectedNodes[i].Distances.Power] = []
-							possibleRelays[ConnectedNodes[i].Distances.Power].append([ConnectedNodes[i]])
+							
+							call_deferred("relaySend", ConnectedNodes[i], data)
 		
 		var closestRelay
 		var sortableRelays = possibleRelays.keys()
@@ -82,23 +82,24 @@ func send(data):
 			closestRelay = (possibleRelays[sortableRelays.min()])[0][0]
 		
 		
-		if closestRelay != null && !data.Couriers.has(closestRelay):
-			call_deferred("relaySend", closestRelay, data)
+		#if closestRelay != null && !data.Couriers.has(closestRelay):
+		#	call_deferred("relaySend", closestRelay, data)
 		
 		
 		if ConnectedNodes[i] != null:
 			if ConnectedNodes[i].is_in_group("power"):
-				if ConnectedNodes[i].StoredPower >= data.Power:
+				if ConnectedNodes[i].StoredPower > data.Power:
 					relaySend(ConnectedNodes[i], data)
-					print("send to mama", data.From)
-					return
+					
+				else:
+					data.From.deadEnd(ConnectedNodes[i])
 		elif !closestRelay:
 			data.From.deadEnd(self)
 
 
 
 func relaySend(to, data):
-	print(str(to))
+	
 	to.send(data)
 
 
