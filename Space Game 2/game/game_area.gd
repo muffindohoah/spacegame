@@ -10,7 +10,9 @@ func _process(delta):
 
 func nodeSelected(node, isStaging):
 	if isStaging:
-		var stagingNode = load("res://nodes/staging_node.tscn").instance()
+		var stagingNode = load("res://nodes/staging_node.tscn").instantiate()
+		
+		stagingNode.isSelectingLocation = true
 		stagingNode.matureSelf = node
 		add_child(stagingNode)
 

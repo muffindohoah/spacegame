@@ -52,10 +52,10 @@ func relaysetDistance(fromlog, distance):
 	
 	
 	for Connector in prospectiveConnectors.size():
-		
-		if prospectiveConnectors[Connector].is_in_group("relay"):
-			
-			prospectiveConnectors[Connector].call_deferred("setDistanceFrom",fromlog, distance)
+		if prospectiveConnectors[Connector] != null:
+			if prospectiveConnectors[Connector].is_in_group("relay"):
+				
+				prospectiveConnectors[Connector].call_deferred("setDistanceFrom",fromlog, distance)
 
 
 func send(data):
@@ -64,16 +64,18 @@ func send(data):
 	data.Couriers.append(self)
 	var possibleRelays = {}
 	for i in ConnectedNodes.size():
-		if ConnectedNodes[i].is_in_group("relay"):
-			if data.To == "Power":
-				
-				
-				print(ConnectedNodes[i].Distances.Power.min(), "you<->me", self.Distances.Power.min())
-				if ConnectedNodes[i].Distances.Power.min() < self.Distances.Power.min():
-					
-					possibleRelays[ConnectedNodes[i].Distances.Power] = []
-					possibleRelays[ConnectedNodes[i].Distances.Power].append([ConnectedNodes[i]])
-			
+		if ConnectedNodes[i] != null:
+			if ConnectedNodes[i].is_in_group("relay"):
+				match data.To:
+					"Power":
+						
+						
+						print(ConnectedNodes[i].Distances.Power.min(), "you<->me", self.Distances.Power.min())
+						if ConnectedNodes[i].Distances.Power.min() < self.Distances.Power.min():
+							
+							possibleRelays[ConnectedNodes[i].Distances.Power] = []
+							possibleRelays[ConnectedNodes[i].Distances.Power].append([ConnectedNodes[i]])
+		
 		var closestRelay
 		var sortableRelays = possibleRelays.keys()
 		if sortableRelays.min():
@@ -84,12 +86,12 @@ func send(data):
 			call_deferred("relaySend", closestRelay, data)
 		
 		
-		
-		if ConnectedNodes[i].is_in_group("power"):
-			if ConnectedNodes[i].StoredPower >= data.Power:
-				relaySend(ConnectedNodes[i], data)
-				print("send to mama", data.From)
-				return
+		if ConnectedNodes[i] != null:
+			if ConnectedNodes[i].is_in_group("power"):
+				if ConnectedNodes[i].StoredPower >= data.Power:
+					relaySend(ConnectedNodes[i], data)
+					print("send to mama", data.From)
+					return
 		elif !closestRelay:
 			data.From.deadEnd(self)
 

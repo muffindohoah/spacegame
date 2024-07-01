@@ -35,7 +35,7 @@ func _physics_process(delta):
 		$Pivot.rotation_degrees += 1.5
 
 func getPower():
-	RequestForm.Couriers = []
+	RequestForm.Couriers.clear()
 	StoredPower -= 1
 	if StoredPower < StoredPowerThreshold:
 		requestPower()

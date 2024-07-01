@@ -11,6 +11,7 @@ var BlankReturnForm = {
 }
 
 func _ready():
+	Utils.WebChanged.connect(updateDistances)
 	Utils.Suppliers.append(self)
 	updateDistances()
 
@@ -41,7 +42,7 @@ func returnRequest(data):
 
 func updateDistances():
 	for i in ConnectedNodes.size():
-		if ConnectedNodes[i].has_method("setDistanceFrom"):
+		if ConnectedNodes[i] != null && ConnectedNodes[i].has_method("setDistanceFrom"):
 			ConnectedNodes[i].setDistanceFrom([self], 0)
 
 func _on_connector_area_entered(area):

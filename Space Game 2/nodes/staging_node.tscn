@@ -17,12 +17,13 @@ bg_color = Color(0.3224, 0.496, 0.62, 1)
 script = ExtResource("1_p3fdh")
 
 [node name="Connector" parent="." instance=ExtResource("2_ipa7r")]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="Connector" index="0"]
 shape = SubResource("CircleShape2D_ac7gt")
 
 [node name="ColorRect" type="TextureRect" parent="."]
-self_modulate = Color(0.6, 0.388235, 0.188235, 1)
 offset_left = -12.0
 offset_top = -14.0
 offset_right = 12.0
@@ -41,13 +42,12 @@ offset_left = 0.00800037
 offset_top = 1.01
 offset_right = 0.0119972
 offset_bottom = 1.0
-theme_override_font_sizes/font_size = 12
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
 theme_override_styles/background = SubResource("StyleBoxFlat_smi1j")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yh5b8")
-value = 75.0
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,9 +1,10 @@
 extends BasicNode
 
-var matureNode = null
+var matureSelf = "Generator"
 
+
+var isSelectingLocation = false
 var StoredPower = 0
-var PowerGoal = 15
 var RequestForm = {
 	"From":self,
 	"To":"Power",
@@ -13,15 +14,27 @@ var RequestForm = {
 	"Couriers":[]
 	}
 
+@onready var PowerGoal = Utils.NodeDB[matureSelf].PowerToBuild
 @onready var progressbar = $ColorRect/ProgressBar
+@onready var timer = $Timer
+@onready var connector = $Connector
 
 func _ready():
-	
+	modulate.a = 100
 	progressbar.max_value = PowerGoal
 
 func _process(delta):
-	pass
+	if isSelectingLocation:
+		global_position = get_global_mouse_position()
+		if Input.is_action_just_pressed("LMB"):
+			isSelectingLocation = false
+			groundSelf()
 
+func groundSelf():
+	modulate.a = 255
+	connector.monitorable = true
+	connector.monitoring = true
+	timer.start()
 
 func getPower():
 	RequestForm.Couriers.clear()
@@ -58,7 +71,17 @@ func _on_connector_area_entered(area):
 		connectNode(prospectiveNode)
 
 func completeNode():
-	print("completion")
+	
+	var butterfly = Utils.NodeDB[matureSelf].PackedScene.instantiate()
+	get_parent().add_child(butterfly)
+	
+	for i in ConnectedNodes:
+		butterfly.connectNode(i)
+	butterfly.global_position = self.global_position
+	
+	Utils.WebChanged.emit()
+	self.queue_free()
+	
 
 func _on_timer_timeout():
 	print("need buildstuff")
