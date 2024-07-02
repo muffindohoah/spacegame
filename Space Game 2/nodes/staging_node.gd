@@ -15,22 +15,34 @@ var RequestForm = {
 	}
 
 @onready var PowerGoal = Utils.NodeDB[matureSelf].PowerToBuild
+@onready var ConnectionRange = Utils.NodeDB[matureSelf].ConnectionRange
 @onready var progressbar = $ColorRect/ProgressBar
 @onready var timer = $Timer
 @onready var connector = $Connector
+@onready var connectorshape = $Connector/CollisionShape2D
 
 func _ready():
 	modulate.a = 100
 	progressbar.max_value = PowerGoal
+	connectorshape.shape.radius = ConnectionRange
 
 func _process(delta):
 	if isSelectingLocation:
-		global_position = get_global_mouse_position()
-		if Input.is_action_just_pressed("LMB"):
-			isSelectingLocation = false
-			groundSelf()
+		_staging_process()
+
+func _staging_process():
+	global_position = get_global_mouse_position()
+	queue_redraw()
+	if Input.is_action_just_pressed("LMB"):
+		isSelectingLocation = false
+		groundSelf()
+
+func _draw():
+	if isSelectingLocation:
+		draw_circle(get_local_mouse_position(), ConnectionRange, Color.STEEL_BLUE)
 
 func groundSelf():
+	
 	modulate.a = 255
 	connector.monitorable = true
 	connector.monitoring = true

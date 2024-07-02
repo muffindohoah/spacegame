@@ -93,8 +93,6 @@ func send(data):
 					
 				else:
 					data.From.deadEnd(ConnectedNodes[i])
-		elif !closestRelay:
-			data.From.deadEnd(self)
 
 
 

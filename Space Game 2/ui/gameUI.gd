@@ -9,7 +9,13 @@ var isPanel = false : set = panelSet
 
 func _ready():
 	AnimPlayer.play("RESET")
+	Utils.ScoreChanged.connect(updateUI)
+	
 	spawnNodeUI()
+	updateUI()
+
+func updateUI():
+	scoreLabel.text = "Rocks: " + str(Utils.SpaceRocks)
 
 func spawnNodeUI():
 	for i in Utils.NodeDB.keys():

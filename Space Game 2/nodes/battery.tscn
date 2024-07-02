@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8u6j22qta13x"]
+
+[ext_resource type="Script" path="res://nodes/battery.gd" id="1_v0r85"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="2_llbuk"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="3_l2ld5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k0bt6"]
+radius = 20.0998
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8bad"]
+radius = 100.045
+
+[node name="Battery" type="Node2D" groups=["giver", "power", "taker"]]
+script = ExtResource("1_v0r85")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.88, 0.5544, 0.5544, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+color = Color(0.22, 0.1188, 0.1694, 1)
+
+[node name="Collision" parent="." instance=ExtResource("2_llbuk")]
+
+[node name="CollisionShape2D" parent="Collision" index="0"]
+shape = SubResource("CircleShape2D_k0bt6")
+
+[node name="Connector" parent="." instance=ExtResource("3_l2ld5")]
+
+[node name="CollisionShape2D" parent="Connector" index="0"]
+shape = SubResource("CircleShape2D_w8bad")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -39.0
+offset_right = 35.0
+offset_bottom = -16.0
+text = "0"
+
+[node name="powertimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
+[connection signal="timeout" from="powertimer" to="." method="_on_powertimer_timeout"]
+
+[editable path="Collision"]
+[editable path="Connector"]

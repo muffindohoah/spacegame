@@ -21,4 +21,5 @@ func updateUI():
 
 func _on_pressed():
 	print("buttonpressed")
+	Utils.SpaceRocks -= Utils.NodeDB[focusNode].Price
 	nodeSelected.emit(focusNode)

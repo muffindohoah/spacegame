@@ -1,11 +1,13 @@
 extends BasicNode
 
+var PowerFrequency = 0.75
 var StoredPower = 5
-var StoredPowerThreshold = 5
-var PoweredThreshold = 1
-var Powered = 0
 
-@export var PowerFrequency : float = 1
+var BlankReturnForm = {
+	"To":0, #Requestee
+	"Power":0 #Requested Amount
+	
+}
 
 var RequestForm = {
 	"From":self,
@@ -17,33 +19,24 @@ var RequestForm = {
 	}
 
 func _ready():
-	
-	$PowerTimer.wait_time = PowerFrequency
-	
+	$Connector/CollisionShape2D.shape.radius = Utils.NodeDB.Battery.ConnectionRange
+	$powertimer.wait_time = PowerFrequency
 	Utils.Demanders.append(self)
+	Utils.WebChanged.connect(updateDistances)
+	Utils.Suppliers.append(self)
+	updateDistances()
+
 
 func _physics_process(delta):
 	$Label.text = str(StoredPower)
 	
-	if StoredPower >= PoweredThreshold:
-		Powered = 1
-	else:
-		Powered = 0
-	
-	if Powered:
-		$Pivot/barrel.color.b += 1
-		$Pivot.rotation_degrees += 1.5
 
 func getPower():
 	RequestForm.Couriers.clear()
-	if StoredPower > 0:
-		StoredPower -= 1
-	if StoredPower < StoredPowerThreshold:
-		requestPower()
 	
+	requestPower()
 
 func receive(data):
-	
 	StoredPower += data.Power
 
 func requestPower():
@@ -51,9 +44,7 @@ func requestPower():
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i] != null:
 			if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
-				var SendingForm = RequestForm.duplicate(false)
 				ConnectedNodes[i].call_deferred("send", RequestForm)
-				
 
 func deadEnd(from):
 	print(RequestForm.PowerParent, from)
@@ -67,11 +58,42 @@ func deadEnd(from):
 			
 			RequestForm.PowerParent = null
 
+
+func _on_power_timer_timeout():
+	getPower()
+
+func send(data):
+	returnRequest(data)
+
+func returnRequest(data):
+	if self != data.PowerParent && data.PowerParent != null:
+		return
+	else:
+		
+		data.PowerParent = self
+		data.ParentGateway = ConnectedNodes.duplicate(false)
+	
+	var ReturnForm = BlankReturnForm
+	ReturnForm.To = data.From
+	
+	if StoredPower >= data.Power:
+		StoredPower -= data.Power
+		ReturnForm.Power = data.Power
+	else:
+		return
+	
+	data.From.receive(ReturnForm)
+
+func updateDistances():
+	for i in ConnectedNodes.size():
+		if ConnectedNodes[i] != null && ConnectedNodes[i].has_method("setDistanceFrom"):
+			ConnectedNodes[i].setDistanceFrom([self], 0)
+
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()
 	if area.is_in_group("collider") && area.get_parent() != self:
 		connectNode(prospectiveNode)
+		updateDistances()
 
-
-func _on_power_timer_timeout():
+func _on_powertimer_timeout():
 	getPower()
