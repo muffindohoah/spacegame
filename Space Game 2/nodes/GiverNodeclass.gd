@@ -1,4 +1,8 @@
-extends TakerNode
+class_name GiverNode
+
+extends BasicNode
+
+@export var ProductionRate = 3
 
 @export var BlankReturnForm = {
 	"To":0, #Requestee
@@ -10,22 +14,14 @@ func _ready():
 	Utils.Suppliers.append(self)
 	updateDistances()
 
-func _physics_process(delta):
-	$Label.text = str(StoredPower)
-
-func getPower():
-	if StoredPower <= StoredPowerThreshold:
-		requestPower()
-
 func send(data):
 	returnRequest(data)
 
 func returnRequest(data):
-	if data.From == self:
-		return
-	if self != data.PowerParent || data.PowerParent != null:
+	if self != data.PowerParent && data.PowerParent != null:
 		return
 	else:
+		
 		data.PowerParent = self
 		data.ParentGateway = ConnectedNodes.duplicate(false)
 	
@@ -50,6 +46,3 @@ func _on_connector_area_entered(area):
 	if area.is_in_group("collider") && area.get_parent() != self:
 		connectNode(prospectiveNode)
 		updateDistances()
-
-func _on_powertimer_timeout():
-	getPower()

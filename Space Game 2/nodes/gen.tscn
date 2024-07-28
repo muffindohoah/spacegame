@@ -10,7 +10,7 @@ radius = 68.0661
 [sub_resource type="CircleShape2D" id="CircleShape2D_aughg"]
 radius = 20.0998
 
-[node name="gen" type="Node2D" groups=["giver", "node", "power"]]
+[node name="gen" type="Node2D" groups=["giver", "power"]]
 script = ExtResource("1_mh6eq")
 
 [node name="Connector" parent="." instance=ExtResource("2_r3jqm")]

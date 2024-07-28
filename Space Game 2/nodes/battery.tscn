@@ -12,6 +12,9 @@ radius = 100.045
 
 [node name="Battery" type="Node2D" groups=["giver", "power", "taker"]]
 script = ExtResource("1_v0r85")
+StoredPowerThreshold = 40
+PowerFrequency = 2
+PoweredThreshold = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0

@@ -70,25 +70,15 @@ func send(data):
 				match data.To:
 					"Power":
 						
-						
 						if ConnectedNodes[i].Distances.Power.min() < self.Distances.Power.min():
-							
 							
 							call_deferred("relaySend", ConnectedNodes[i], data)
 		
-		var closestRelay
-		var sortableRelays = possibleRelays.keys()
-		if sortableRelays.min():
-			closestRelay = (possibleRelays[sortableRelays.min()])[0][0]
-		
-		
-		#if closestRelay != null && !data.Couriers.has(closestRelay):
-		#	call_deferred("relaySend", closestRelay, data)
 		
 		
 		if ConnectedNodes[i] != null:
-			if ConnectedNodes[i].is_in_group("power"):
-				if ConnectedNodes[i].StoredPower > data.Power:
+			if ConnectedNodes[i].is_in_group("power") && ConnectedNodes[i] != self:
+				if ConnectedNodes[i].StoredPower >= data.Power:
 					relaySend(ConnectedNodes[i], data)
 					
 				else:
@@ -97,7 +87,6 @@ func send(data):
 
 
 func relaySend(to, data):
-	
 	to.send(data)
 
 

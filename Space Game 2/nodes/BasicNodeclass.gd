@@ -2,6 +2,8 @@ class_name BasicNode
 
 extends Node2D
 
+@export var StoredPower = 0
+
 var ConnectedNodes = []
  
 func connectNode(node):

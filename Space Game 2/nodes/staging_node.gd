@@ -4,7 +4,6 @@ var matureSelf = "Generator"
 
 
 var isSelectingLocation = false
-var StoredPower = 0
 var RequestForm = {
 	"From":self,
 	"To":"Power",
