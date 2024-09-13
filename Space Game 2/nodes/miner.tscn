@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvr5i4pa7rin"]
+
+[ext_resource type="Script" path="res://nodes/Miner.gd" id="1_g6wuv"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_27klw"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_5glb6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tfmnj"]
+radius = 65.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6hxg"]
+radius = 40.0
+
+[node name="Miner" type="Node2D"]
+script = ExtResource("1_g6wuv")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -42.0
+offset_right = 63.0
+offset_bottom = -19.0
+text = "1"
+
+[node name="Connector" parent="." instance=ExtResource("2_27klw")]
+
+[node name="CollisionShape2D" parent="Connector" index="0"]
+shape = SubResource("CircleShape2D_tfmnj")
+
+[node name="Collision" parent="." instance=ExtResource("3_5glb6")]
+
+[node name="CollisionShape2D" parent="Collision" index="0"]
+shape = SubResource("CircleShape2D_m6hxg")
+
+[node name="PowerTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="base" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+color = Color(0.324607, 0.472203, 0.25189, 1)
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="barrel" type="ColorRect" parent="Pivot"]
+offset_left = -6.0
+offset_top = -4.0
+offset_right = 35.0
+offset_bottom = 4.0
+color = Color(0.38989, 0.75165, 0.96498, 1)
+
+[connection signal="area_entered" from="Connector" to="." method="_on_connector_2_area_entered"]
+[connection signal="timeout" from="PowerTimer" to="." method="_on_power_timer_timeout"]
+
+[editable path="Connector"]
+[editable path="Collision"]

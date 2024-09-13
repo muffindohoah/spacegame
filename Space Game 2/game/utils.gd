@@ -4,7 +4,7 @@ var NodeDB = {
 	"Relay":{"PackedScene":preload("res://nodes/relay.tscn"), "Price":1, "PowerToBuild":2, "ConnectionRange":100},
 	"Generator":{"PackedScene":preload("res://nodes/gen.tscn"), "Price":10, "PowerToBuild":15, "ConnectionRange":100},
 	"Turret":{"PackedScene":preload("res://nodes/turret.tscn"), "Price":7, "PowerToBuild":7, "ConnectionRange":60},
-	"Miner":{"PackedScene":null, "Price":4, "PowerToBuild":4, "ConnectionRange":60},
+	"Miner":{"PackedScene":preload("res://nodes/miner.tscn"), "Price":4, "PowerToBuild":4, "ConnectionRange":40},
 	"Battery":{"PackedScene":preload("res://nodes/battery.tscn"), "Price":6, "PowerToBuild":5, "ConnectionRange":60}
 	}
 

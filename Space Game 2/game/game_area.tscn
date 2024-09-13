@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b067cv2jqyfww"]
+[gd_scene load_steps=7 format=3 uid="uid://b067cv2jqyfww"]
 
 [ext_resource type="Script" path="res://game/game_area.gd" id="1_83rih"]
 [ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://nodes/relay.tscn" id="1_4287h"]
 [ext_resource type="PackedScene" uid="uid://dlnfaliclscl4" path="res://nodes/gen.tscn" id="3_q68f6"]
 [ext_resource type="PackedScene" uid="uid://dqtc13uqjsv45" path="res://nodes/turret.tscn" id="4_pvicg"]
 [ext_resource type="PackedScene" uid="uid://dxsvihcew6epd" path="res://game/gameview.tscn" id="5_425xm"]
+[ext_resource type="PackedScene" uid="uid://dbb8g74m5lwf7" path="res://nodes/asteroid.tscn" id="6_px3bf"]
 
 [node name="GameArea" type="Node2D"]
 script = ExtResource("1_83rih")
@@ -53,3 +54,6 @@ position = Vector2(-320, -195)
 
 [node name="gameview" parent="." instance=ExtResource("5_425xm")]
 position = Vector2(-115, -30)
+
+[node name="Asteroid" parent="." instance=ExtResource("6_px3bf")]
+position = Vector2(65, -84)

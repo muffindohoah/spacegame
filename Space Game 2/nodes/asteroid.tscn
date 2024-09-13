@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbb8g74m5lwf7"]
+
+[ext_resource type="Script" path="res://nodes/asteroid.gd" id="1_2tx0l"]
+[ext_resource type="Texture2D" uid="uid://dwr4kn45io1tn" path="res://assets/asteroid/generic-asteroid.png" id="1_n0k5y"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_6nuus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjlea"]
+size = Vector2(64, 80)
+
+[node name="Asteroid" type="Node2D" groups=["asteroid"]]
+script = ExtResource("1_2tx0l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7.62939e-06)
+scale = Vector2(0.174805, 0.171875)
+texture = ExtResource("1_n0k5y")
+
+[node name="Collision" parent="." groups=["asteroid"] instance=ExtResource("3_6nuus")]
+
+[node name="CollisionShape2D" parent="Collision" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_bjlea")
+debug_color = Color(0.309784, 0.616554, 0.329133, 0.42)
+
+[node name="ResourceLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+text = "1000"
+
+[editable path="Collision"]
