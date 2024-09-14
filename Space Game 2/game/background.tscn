@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://x4k3xph04y4f"]
+
+[ext_resource type="Shader" path="res://game/background.gdshader" id="1_221ci"]
+[ext_resource type="Texture2D" uid="uid://c7nymhfcdr3hl" path="res://addons/sprite_painter/graphics/diags.png" id="2_k22us"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ji3me"]
+shader = ExtResource("1_221ci")
+shader_parameter/mouse = null
+shader_parameter/time = null
+shader_parameter/speed2 = 0.2
+
+[node name="Background" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+z_index = -1
+material = SubResource("ShaderMaterial_ji3me")
+position = Vector2(128.5, -57.5004)
+scale = Vector2(16.3691, 10.959)
+texture = ExtResource("2_k22us")

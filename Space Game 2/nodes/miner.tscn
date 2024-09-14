@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvr5i4pa7rin"]
 
-[ext_resource type="Script" path="res://nodes/Miner.gd" id="1_g6wuv"]
+[ext_resource type="Script" path="res://nodes/miner.gd" id="1_4g4bl"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_27klw"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_5glb6"]
 
@@ -11,7 +11,7 @@ radius = 65.0
 radius = 40.0
 
 [node name="Miner" type="Node2D"]
-script = ExtResource("1_g6wuv")
+script = ExtResource("1_4g4bl")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -5.0

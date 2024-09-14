@@ -93,5 +93,6 @@ func relaySend(to, data):
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()
 	if area.is_in_group("collider") && area.get_parent() != self:
-		
-		connectNode(prospectiveNode)
+		if !area.get_parent().is_in_group("asteroid"):
+			
+			connectNode(prospectiveNode)

@@ -19,6 +19,7 @@ func _powered_process():
 	pass
 
 func mine():
+	print(ConnectedNodes)
 	for i in ConnectedNodes.size():
 		
 		if ConnectedNodes[i] != null && ConnectedNodes[i].is_in_group("asteroid"):
