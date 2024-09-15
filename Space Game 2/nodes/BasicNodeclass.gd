@@ -9,7 +9,7 @@ var ConnectedNodes = []
 func connectNode(node):
 	print(ConnectedNodes, node)
 	if !ConnectedNodes.has(node):
-		var WireScene = load("res://nodes/wire.tscn").instantiate()
+		var WireScene = load("res://nodes/wire/wire.tscn").instantiate()
 		WireScene.WiredFrom = self
 		WireScene.WiredTo = node
 		get_parent().add_child.call_deferred(WireScene)

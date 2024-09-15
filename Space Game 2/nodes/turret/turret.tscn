@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqtc13uqjsv45"]
+[gd_scene load_steps=7 format=3 uid="uid://dqtc13uqjsv45"]
 
-[ext_resource type="Script" path="res://nodes/turret.gd" id="1_6281m"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="1_ikl35"]
+[ext_resource type="Script" path="res://nodes/turret/turret.gd" id="1_wcu16"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="2_iccs0"]
+[ext_resource type="Texture2D" uid="uid://cfon2trqh4c3k" path="res://addons/sprite_painter/graphics/rect_shape_2d.svg" id="4_muvje"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xvxp4"]
 radius = 64.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ogpxy"]
-radius = 19.4165
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qupdj"]
+size = Vector2(40, 40)
 
-[node name="turret" type="Node2D"]
-script = ExtResource("1_6281m")
+[node name="turret" type="Node2D" groups=["node", "taker"]]
+script = ExtResource("1_wcu16")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -5.0
@@ -28,17 +29,15 @@ shape = SubResource("CircleShape2D_xvxp4")
 [node name="Collision" parent="." instance=ExtResource("2_iccs0")]
 
 [node name="CollisionShape2D" parent="Collision" index="0"]
-shape = SubResource("CircleShape2D_ogpxy")
+shape = SubResource("RectangleShape2D_qupdj")
 
 [node name="PowerTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="base" type="ColorRect" parent="."]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.46, 0.3864, 0.435467, 1)
+[node name="base" type="Sprite2D" parent="."]
+position = Vector2(0, 0.250002)
+scale = Vector2(2.875, 4.15625)
+texture = ExtResource("4_muvje")
 
 [node name="Pivot" type="Node2D" parent="."]
 

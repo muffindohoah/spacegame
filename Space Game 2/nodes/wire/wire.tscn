@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://by6s3c4ctyewl"]
 
-[ext_resource type="Script" path="res://nodes/Wire.gd" id="1_torg2"]
+[ext_resource type="Script" path="res://nodes/wire/Wire.gd" id="1_torg2"]
 
 [node name="Wire" type="Line2D"]
 z_index = -1

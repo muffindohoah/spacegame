@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkipiyxhl5qk0"]
+
+[ext_resource type="Script" path="res://ui/inspector/inspector.gd" id="1_qdinb"]
+[ext_resource type="Texture2D" uid="uid://cpxsxp2vr8kc6" path="res://addons/sprite_painter/graphics/circle_shape_2d.svg" id="2_60636"]
+[ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="3_wxu1i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5s801"]
+radius = 1.8
+
+[node name="Inspector" type="Node2D"]
+script = ExtResource("1_qdinb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_60636")
+
+[node name="Connector" parent="." instance=ExtResource("3_wxu1i")]
+
+[node name="CollisionShape2D" parent="Connector" index="0"]
+shape = SubResource("CircleShape2D_5s801")
+
+[connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
+
+[editable path="Connector"]

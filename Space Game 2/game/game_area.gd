@@ -10,7 +10,7 @@ func _process(delta):
 
 func nodeSelected(node, isStaging):
 	if isStaging:
-		var stagingNode = load("res://nodes/staging_node.tscn").instantiate()
+		var stagingNode = load("res://nodes/staging node/staging_node.tscn").instantiate()
 		
 		stagingNode.isSelectingLocation = true
 		stagingNode.matureSelf = node

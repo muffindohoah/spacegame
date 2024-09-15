@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlnfaliclscl4"]
 
-[ext_resource type="Script" path="res://nodes/gen.gd" id="1_mh6eq"]
+[ext_resource type="Script" path="res://nodes/generator/gen.gd" id="1_ee4s7"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_r3jqm"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_jyja2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11f7k"]
 radius = 68.0661
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_aughg"]
-radius = 20.0998
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk8fg"]
+size = Vector2(40, 40)
 
-[node name="gen" type="Node2D" groups=["giver", "power"]]
-script = ExtResource("1_mh6eq")
+[node name="gen" type="Node2D" groups=["giver", "node", "power"]]
+script = ExtResource("1_ee4s7")
 
 [node name="Connector" parent="." instance=ExtResource("2_r3jqm")]
 
@@ -28,7 +28,7 @@ color = Color(0.8, 0.456, 0.32, 1)
 [node name="Collision" parent="." instance=ExtResource("3_jyja2")]
 
 [node name="CollisionShape2D" parent="Collision" index="0"]
-shape = SubResource("CircleShape2D_aughg")
+shape = SubResource("RectangleShape2D_uk8fg")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.278

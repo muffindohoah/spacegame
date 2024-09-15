@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci8vg0aqpbsvf"]
+[gd_scene load_steps=9 format=3 uid="uid://ci8vg0aqpbsvf"]
 
-[ext_resource type="Script" path="res://nodes/staging_node.gd" id="1_p3fdh"]
+[ext_resource type="Script" path="res://nodes/staging node/staging_node.gd" id="1_p3fdh"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_ipa7r"]
+[ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_4dsdw"]
 [ext_resource type="Texture2D" uid="uid://c7nymhfcdr3hl" path="res://addons/sprite_painter/graphics/diags.png" id="3_ews06"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac7gt"]
 radius = 100.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eti8n"]
+size = Vector2(24, 25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smi1j"]
 bg_color = Color(0.22425, 0.161, 0.23, 1)
@@ -13,7 +17,7 @@ bg_color = Color(0.22425, 0.161, 0.23, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh5b8"]
 bg_color = Color(0.3224, 0.496, 0.62, 1)
 
-[node name="stagingNode" type="Node2D"]
+[node name="stagingNode" type="Node2D" groups=["node", "taker"]]
 script = ExtResource("1_p3fdh")
 
 [node name="Connector" parent="." instance=ExtResource("2_ipa7r")]
@@ -22,6 +26,12 @@ monitorable = false
 
 [node name="CollisionShape2D" parent="Connector" index="0"]
 shape = SubResource("CircleShape2D_ac7gt")
+
+[node name="Collision" parent="." instance=ExtResource("3_4dsdw")]
+
+[node name="CollisionShape2D" parent="Collision" index="0"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_eti8n")
 
 [node name="ColorRect" type="TextureRect" parent="."]
 offset_left = -12.0
@@ -53,3 +63,4 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_yh5b8")
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Connector"]
+[editable path="Collision"]
