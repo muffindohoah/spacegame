@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://bery880p2fcll"]
+
+[ext_resource type="Texture2D" uid="uid://ro5r4gstjow0" path="res://addons/sprite_painter/graphics/tool_scale.tres" id="1_il6cn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xsln"]
+bg_color = Color(0.2784, 0.2552, 0.29, 1)
+corner_detail = 20
+
+[node name="NodeDataPopup" type="Window"]
+title = "Generator"
+initial_position = 1
+size = Vector2i(200, 300)
+unresizable = true
+extend_to_title = true
+min_size = Vector2i(200, 200)
+max_size = Vector2i(200, 400)
+keep_title_visible = true
+content_scale_aspect = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Panel" type="Panel" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2xsln")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel"]
+top_level = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_right = 57.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Panel/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_il6cn")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Powered?"
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+color = Color(0.303975, 0.200081, 0.127963, 1)
