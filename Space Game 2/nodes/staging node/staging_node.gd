@@ -1,7 +1,7 @@
 extends BasicNode
 
 var matureSelf = "Generator"
-
+@onready var matureNodeData = Utils.getNodeTypeData(matureSelf)
 
 var isSelectingLocation = false
 var RequestForm = {
@@ -13,10 +13,11 @@ var RequestForm = {
 	"Couriers":[]
 	}
 
-@onready var PowerGoal = Utils.NodeDB[matureSelf].PowerToBuild
-@onready var ConnectionRange = Utils.NodeDB[matureSelf].ConnectionRange
+@onready var PowerGoal = matureNodeData.PowerToBuild
+@onready var ConnectionRange = matureNodeData.ConnectionRange
 @onready var progressbar = $ColorRect/ProgressBar
 @onready var timer = $Timer
+@onready var collision = $Collision
 @onready var connector = $Connector
 @onready var connectorshape = $Connector/CollisionShape2D
 
@@ -45,6 +46,8 @@ func groundSelf():
 	modulate.a = 255
 	connector.monitorable = true
 	connector.monitoring = true
+	collision.monitorable = true
+	collision.monitoring = true
 	timer.start()
 
 func getPower():
@@ -59,10 +62,11 @@ func getPower():
 func requestPower():
 	
 	for i in ConnectedNodes.size():
-		if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
-			
-			var SendingForm = RequestForm.duplicate(false)
-			ConnectedNodes[i].send(SendingForm)
+		if !ConnectedNodes[i] == null:
+			if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
+				
+				var SendingForm = RequestForm.duplicate(false)
+				ConnectedNodes[i].send(SendingForm)
 
 func receive(data):
 	
@@ -83,12 +87,12 @@ func _on_connector_area_entered(area):
 		if !prospectiveNode.is_in_group("asteroid"):
 			connectNode(prospectiveNode)
 		
-		if (prospectiveNode.is_in_group("asteroid")) && (matureSelf == "Miner"):
+		if (prospectiveNode.is_in_group("asteroid")) && (matureNodeData.nodeName == "Miner"):
 			connectNode(prospectiveNode)
 
 func completeNode():
 	
-	var butterfly = Utils.NodeDB[matureSelf].PackedScene.instantiate()
+	var butterfly = matureNodeData.packedScene.instantiate()
 	get_parent().add_child(butterfly)
 	
 	for i in ConnectedNodes:

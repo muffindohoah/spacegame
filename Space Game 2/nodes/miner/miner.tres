@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="nodeDB" load_steps=3 format=3 uid="uid://ckv6xuffus68a"]
+
+[ext_resource type="PackedScene" uid="uid://cvr5i4pa7rin" path="res://nodes/miner/miner.tscn" id="1_vly71"]
+[ext_resource type="Script" path="res://nodes/nodeDB.gd" id="2_sp7oi"]
+
+[resource]
+script = ExtResource("2_sp7oi")
+nodeName = "Miner"
+packedScene = ExtResource("1_vly71")
+Price = 4
+PowerToBuild = 4
+ConnectionRange = 40
+PowerThreshold = 1
+displayedValues = []

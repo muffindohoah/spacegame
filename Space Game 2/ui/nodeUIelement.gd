@@ -1,6 +1,7 @@
 extends Button
 
 var focusNode : set = setFocusNode
+var nodeData
 
 @onready var NameLabel = $VBoxContainer/NameLabel
 @onready var PriceLabel = $VBoxContainer/PriceLabel
@@ -10,16 +11,20 @@ signal nodeSelected(node)
 
 func setFocusNode(value):
 	focusNode = value
+	nodeData = Utils.getNodeTypeData(focusNode)
+	print(focusNode + str(nodeData))
 
 func _ready():
 	updateUI()
 
 func updateUI():
-	print(Utils.NodeDB[focusNode].Price)
-	PriceLabel.text = str(Utils.NodeDB[focusNode].Price)
-	NameLabel.text = focusNode
+	
+	if focusNode:
+		print(nodeData)
+		PriceLabel.text = str(nodeData.Price)
+		NameLabel.text = nodeData.nodeName
 
 func _on_pressed():
 	print("buttonpressed")
-	Utils.SpaceRocks -= Utils.NodeDB[focusNode].Price
+	Utils.SpaceRocks -= nodeData.Price
 	nodeSelected.emit(focusNode)

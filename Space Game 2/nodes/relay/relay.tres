@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="nodeDB" load_steps=3 format=3 uid="uid://bus3mvroyn4fi"]
+
+[ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://nodes/relay/relay.tscn" id="1_12hqn"]
+[ext_resource type="Script" path="res://nodes/nodeDB.gd" id="2_003pe"]
+
+[resource]
+script = ExtResource("2_003pe")
+nodeName = "Relay"
+nodeScene = ExtResource("1_12hqn")
+Price = 1
+PowerToBuild = 2
+ConnectionRange = 100
+PowerThreshold = 0
+displayedValues = []

@@ -28,6 +28,8 @@ monitorable = false
 shape = SubResource("CircleShape2D_ac7gt")
 
 [node name="Collision" parent="." instance=ExtResource("3_4dsdw")]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="Collision" index="0"]
 position = Vector2(0, -1.5)

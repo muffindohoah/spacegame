@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ui/inspector/inspectorBounds.gd" id="1_ep0bi"]
 [ext_resource type="Texture2D" uid="uid://yunqetk64l50" path="res://addons/sprite_painter/graphics/triangle_shape_2d.svg" id="2_2ldnj"]
 
-[node name="InspectorBounds" type="Node2D" groups=["bound"]]
+[node name="InspectorBounds" type="Node2D" groups=["asteroid", "bound"]]
 script = ExtResource("1_ep0bi")
 
 [node name="TriangleShape2d" type="Sprite2D" parent="."]

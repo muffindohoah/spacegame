@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="nodeDB" load_steps=3 format=3 uid="uid://cmx2kttqpbjnv"]
+
+[ext_resource type="PackedScene" uid="uid://dqtc13uqjsv45" path="res://nodes/turret/turret.tscn" id="1_b1w5u"]
+[ext_resource type="Script" path="res://nodes/nodeDB.gd" id="2_4exbt"]
+
+[resource]
+script = ExtResource("2_4exbt")
+nodeName = "Turret"
+packedScene = ExtResource("1_b1w5u")
+Price = 7
+PowerToBuild = 5
+ConnectionRange = 60
+PowerThreshold = 5
+displayedValues = []

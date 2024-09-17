@@ -7,14 +7,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5s801"]
 radius = 1.8
 
-[node name="Inspector" type="Node2D"]
+[node name="Inspector" type="Node2D" groups=["asteroid"]]
 script = ExtResource("1_qdinb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_60636")
 
-[node name="Connector" parent="." instance=ExtResource("3_wxu1i")]
+[node name="Connector" parent="." groups=["asteroid"] instance=ExtResource("3_wxu1i")]
 
 [node name="CollisionShape2D" parent="Connector" index="0"]
 shape = SubResource("CircleShape2D_5s801")
