@@ -38,16 +38,16 @@ position = Vector2(-176, -231)
 [node name="Relay24" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-231, -183)
 
-[node name="gen" parent="." instance=ExtResource("3_q68f6")]
+[node name="generator" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(-429, -112)
 
-[node name="gen4" parent="." instance=ExtResource("3_q68f6")]
+[node name="generator4" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(71, 115)
 
-[node name="gen3" parent="." instance=ExtResource("3_q68f6")]
+[node name="generator3" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(-110, -205)
 
-[node name="gen2" parent="." instance=ExtResource("3_q68f6")]
+[node name="generator2" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(-269, 158)
 
 [node name="turret2" parent="." instance=ExtResource("4_pvicg")]

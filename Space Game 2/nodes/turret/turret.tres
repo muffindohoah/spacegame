@@ -11,4 +11,8 @@ Price = 7
 PowerToBuild = 5
 ConnectionRange = 60
 PowerThreshold = 5
-displayedValues = []
+displayedValues = {
+"PoweredThreshold": false,
+"detectionRadius": true,
+"spinSpeed": true
+}

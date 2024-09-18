@@ -1,6 +1,9 @@
 extends Node2D
 
+@onready var dataPopupScene = preload("res://ui/inspector/nodeDataPopup.tscn")
+
 var focusNode
+
 
 func _unhandled_input(event):
 	
@@ -25,7 +28,7 @@ func _on_connector_area_entered(area):
 	self.visible = true
 	
 	createBounds(focusNode)
-	showDataUI()
+	showDataUI(focusNode)
 
 func killBounds():
 	for n in self.get_children():
@@ -43,5 +46,7 @@ func createBounds(aroundnode):
 		tempInspectorBound.duckling = i
 		self.add_child(tempInspectorBound)
 
-func showDataUI():
-	pass
+func showDataUI(forNode):
+	var dataPopup = dataPopupScene.instantiate()
+	dataPopup.focusNode = forNode
+	add_child(dataPopup)

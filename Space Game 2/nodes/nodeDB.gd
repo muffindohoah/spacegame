@@ -10,4 +10,4 @@ class_name nodeDB
 
 var Power = 0
 @export var PowerThreshold = 20
-@export var displayedValues = []
+@export var displayedValues = {}

@@ -1,5 +1,7 @@
 extends TakerNode
 
+var spinSpeed = 1.5
+
 func _ready():
 	
 	$PowerTimer.wait_time = PowerFrequency
@@ -14,7 +16,7 @@ func _physics_process(delta):
 	
 	if Powered:
 		$Pivot/barrel.color.b += 1
-		$Pivot.rotation_degrees += 1.5
+		$Pivot.rotation_degrees += spinSpeed
 
 func _on_power_timer_timeout():
 	getPower()

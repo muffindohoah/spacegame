@@ -1,67 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://bery880p2fcll"]
+[gd_scene load_steps=5 format=3 uid="uid://bery880p2fcll"]
 
-[ext_resource type="Texture2D" uid="uid://ro5r4gstjow0" path="res://addons/sprite_painter/graphics/tool_scale.tres" id="1_il6cn"]
+[ext_resource type="Script" path="res://ui/inspector/nodeDataPopup.gd" id="1_76p2w"]
+[ext_resource type="Texture2D" uid="uid://dbn30hxsyb4lv" path="res://assets/UI/placeholderpreview.png" id="1_d3e1d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xsln"]
-bg_color = Color(0.2784, 0.2552, 0.29, 1)
+bg_color = Color(0.1672, 0.22, 0.1672, 1)
 corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7onp"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 3
+expand_margin_bottom = 1465.0
 
 [node name="NodeDataPopup" type="Window"]
 title = "Generator"
 initial_position = 1
-size = Vector2i(200, 300)
+size = Vector2i(200, 380)
 unresizable = true
+popup_window = true
 extend_to_title = true
 min_size = Vector2i(200, 200)
 max_size = Vector2i(200, 400)
 keep_title_visible = true
 content_scale_aspect = 1
+script = ExtResource("1_76p2w")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
+offset_right = 192.0
+offset_bottom = 1000.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2xsln")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+top_level = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_scroll_mode = 0
+theme_override_constants/separation = 4
 
-[node name="Panel" type="Panel" parent="ScrollContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_2xsln")
+size_flags_vertical = 0
+texture = ExtResource("1_d3e1d")
+stretch_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel"]
-top_level = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -57.0
-offset_right = 57.0
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_il6cn")
-expand_mode = 4
-stretch_mode = 6
+theme_override_constants/separation = 11
+theme_override_styles/separator = SubResource("StyleBoxFlat_e7onp")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/VBoxContainer"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 7
-alignment = 1
-
-[node name="Label" type="Label" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Powered?"
-
-[node name="CheckBox" type="CheckBox" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/Panel/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-color = Color(0.303975, 0.200081, 0.127963, 1)
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

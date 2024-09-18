@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca88frtovn34v"]
+
+[ext_resource type="Script" path="res://ui/inspector/popupHbox.gd" id="1_kuy0e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhhcr"]
+bg_color = Color(0.46899, 0.304164, 0.353865, 1)
+border_width_left = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+expand_margin_right = 91.0
+
+[node name="HBoxContainer" type="HBoxContainer"]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.0
+offset_right = 94.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 7
+alignment = 2
+script = ExtResource("1_kuy0e")
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Powered?"
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_xhhcr")
+
+[node name="CheckBox" type="SpinBox" parent="."]
+layout_mode = 2
