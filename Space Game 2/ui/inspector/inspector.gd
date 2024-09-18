@@ -49,4 +49,9 @@ func createBounds(aroundnode):
 func showDataUI(forNode):
 	var dataPopup = dataPopupScene.instantiate()
 	dataPopup.focusNode = forNode
+	
+	var canvas_position = forNode.get_canvas_transform().origin
+	dataPopup.position = Vector2(forNode.get_global_transform_with_canvas().origin.x + 34, forNode.get_global_transform_with_canvas().origin.y - 30)
 	add_child(dataPopup)
+
+

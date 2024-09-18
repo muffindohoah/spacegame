@@ -13,14 +13,13 @@ border_width_top = 3
 expand_margin_bottom = 1465.0
 
 [node name="NodeDataPopup" type="Window"]
-title = "Generator"
-initial_position = 1
-size = Vector2i(200, 380)
+title = "Example"
+size = Vector2i(230, 380)
+transient = true
 unresizable = true
 popup_window = true
-extend_to_title = true
 min_size = Vector2i(200, 200)
-max_size = Vector2i(200, 400)
+max_size = Vector2i(300, 400)
 keep_title_visible = true
 content_scale_aspect = 1
 script = ExtResource("1_76p2w")
