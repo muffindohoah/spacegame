@@ -26,4 +26,3 @@ func getNodeTypeData(nodeType):
 	print(("res://nodes/{n}/{n}.tres").format({"n": str(nodeType)}))
 	var typeData := load(("res://nodes/{n}/{n}.tres").format({"n": str(nodeType)})) as nodeDB
 	return typeData
-

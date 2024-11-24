@@ -10,7 +10,7 @@ radius = 65.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5c80"]
 size = Vector2(30, 30)
 
-[node name="Miner" type="Node2D" groups=["node"]]
+[node name="miner" type="Node2D" groups=["node"]]
 script = ExtResource("1_00886")
 
 [node name="Label" type="Label" parent="."]

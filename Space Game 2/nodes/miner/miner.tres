@@ -11,4 +11,4 @@ Price = 4
 PowerToBuild = 4
 ConnectionRange = 40
 PowerThreshold = 1
-displayedValues = []
+displayedValues = {}

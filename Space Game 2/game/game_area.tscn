@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b067cv2jqyfww"]
+[gd_scene load_steps=11 format=3 uid="uid://b067cv2jqyfww"]
 
 [ext_resource type="Script" path="res://game/game_area.gd" id="1_83rih"]
 [ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://nodes/relay/relay.tscn" id="1_4287h"]
@@ -8,34 +8,44 @@
 [ext_resource type="PackedScene" uid="uid://dbb8g74m5lwf7" path="res://nodes/asteroid/asteroid.tscn" id="6_px3bf"]
 [ext_resource type="PackedScene" uid="uid://x4k3xph04y4f" path="res://game/background.tscn" id="7_jucmn"]
 [ext_resource type="PackedScene" uid="uid://bkipiyxhl5qk0" path="res://ui/inspector/inspector.tscn" id="8_shgor"]
+[ext_resource type="PackedScene" uid="uid://dm4mr6wcb1npx" path="res://enemies/brute/brute.tscn" id="9_jemf0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nr2tk"]
+vertices = PackedVector2Array(3886, 2404.88, -3650.15, 2317.12, -3277.75, -2239.3, 3886, -2480.66)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3287, -2249, 3896, -2491, 3896, 2415, -3661, 2327)])
 
 [node name="GameArea" type="Node2D"]
 script = ExtResource("1_83rih")
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_nr2tk")
+
 [node name="Background" parent="." instance=ExtResource("7_jucmn")]
 
-[node name="Relay4" parent="." instance=ExtResource("1_4287h")]
+[node name="relay4" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(159, 104)
 
-[node name="Relay7" parent="." instance=ExtResource("1_4287h")]
+[node name="relay7" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-313, 5)
 
-[node name="Relay11" parent="." instance=ExtResource("1_4287h")]
+[node name="relay11" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-381, -59)
 
 [node name="Relay15" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-287, 92)
 
-[node name="Relay12" parent="." instance=ExtResource("1_4287h")]
+[node name="relay12" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-224, -1)
 
-[node name="Relay14" parent="." instance=ExtResource("1_4287h")]
+[node name="relay14" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-136, 18)
 
-[node name="Relay21" parent="." instance=ExtResource("1_4287h")]
+[node name="relay21" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-176, -231)
 
-[node name="Relay24" parent="." instance=ExtResource("1_4287h")]
+[node name="relay24" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-231, -183)
 
 [node name="generator" parent="." instance=ExtResource("3_q68f6")]
@@ -64,3 +74,9 @@ position = Vector2(65, -84)
 
 [node name="Inspector" parent="." instance=ExtResource("8_shgor")]
 position = Vector2(277, -94)
+
+[node name="brute2" parent="." instance=ExtResource("9_jemf0")]
+position = Vector2(160, -111)
+
+[node name="brute" parent="." instance=ExtResource("9_jemf0")]
+position = Vector2(92, -258)

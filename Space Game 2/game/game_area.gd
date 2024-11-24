@@ -15,4 +15,3 @@ func nodeSelected(node, isStaging):
 		stagingNode.isSelectingLocation = true
 		stagingNode.matureSelf = node
 		add_child(stagingNode)
-

@@ -7,8 +7,12 @@ var focusNode
 @onready var VBox = $Panel/VBoxContainer
 
 func _ready():
-	self.title = focusNodeData.nodeName
-	createValues()
+	print(focusNode)
+	if !focusNodeData == null:
+		self.title = focusNodeData.nodeName
+		createValues()
+	else:
+		_on_close_requested()
 
 func createValues():
 	print(focusNodeData.displayedValues.keys())

@@ -8,4 +8,3 @@ func _ready():
 	default_color = WireColor
 	add_point(WiredFrom.global_position)
 	add_point(WiredTo.global_position)
-

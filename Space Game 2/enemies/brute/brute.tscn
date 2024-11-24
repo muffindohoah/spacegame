@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://dm4mr6wcb1npx"]
+
+[ext_resource type="Script" path="res://enemies/brute/brute.gd" id="1_q4bxm"]
+[ext_resource type="Texture2D" uid="uid://b87d0axjdgt8l" path="res://assets/enemies/fume.png" id="2_xmwhf"]
+[ext_resource type="Texture2D" uid="uid://w20780i8dmve" path="res://assets/enemies/brute.png" id="3_i7evp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8e8wx"]
+radius = 9.99999
+height = 34.0
+
+[sub_resource type="Curve" id="Curve_s622s"]
+_data = [Vector2(0, 1), 0.0, -0.168199, 0, 0, Vector2(1, 0), -3.2967, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vxros"]
+curve = SubResource("Curve_s622s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_om3ne"]
+particle_flag_disable_z = true
+angle_min = -185.8
+angle_max = 216.8
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 0)
+spread = 8.596
+initial_velocity_max = 204.3
+gravity = Vector3(0, 0, 0)
+damping_min = 39.785
+damping_max = 75.806
+scale_min = 0.22
+scale_max = 0.3
+alpha_curve = SubResource("CurveTexture_vxros")
+turbulence_enabled = true
+turbulence_noise_scale = 10.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.152
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hfmhl"]
+radius = 92.1954
+
+[node name="brute" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_q4bxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_8e8wx")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Sprite2D")
+update_position = false
+update_scale = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.605, 0.605)
+texture = ExtResource("3_i7evp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+z_index = -1
+position = Vector2(-23, -1.91)
+rotation = 3.14159
+scale = Vector2(2.17391, 2)
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_om3ne")
+texture = ExtResource("2_xmwhf")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 35.0
+avoidance_enabled = true
+radius = 20.1
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="NavigationAgent2D"]
+wait_time = 0.291
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hfmhl")
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

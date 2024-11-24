@@ -42,4 +42,3 @@ func togglePanel():
 
 func _on_popup_button_pressed():
 	togglePanel()
-

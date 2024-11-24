@@ -29,4 +29,8 @@ offset_right = 20.0
 offset_bottom = 11.0
 text = "1000"
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 40.54
+affect_navigation_mesh = true
+
 [editable path="Collision"]

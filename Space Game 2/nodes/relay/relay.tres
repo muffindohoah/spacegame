@@ -6,9 +6,9 @@
 [resource]
 script = ExtResource("2_003pe")
 nodeName = "Relay"
-nodeScene = ExtResource("1_12hqn")
+packedScene = ExtResource("1_12hqn")
 Price = 1
 PowerToBuild = 2
 ConnectionRange = 100
 PowerThreshold = 0
-displayedValues = []
+displayedValues = {}
