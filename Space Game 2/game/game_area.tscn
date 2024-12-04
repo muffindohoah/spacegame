@@ -23,30 +23,25 @@ visible = false
 navigation_polygon = SubResource("NavigationPolygon_nr2tk")
 
 [node name="Background" parent="." instance=ExtResource("7_jucmn")]
+position = Vector2(-152, -225)
 
 [node name="relay4" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(159, 104)
+position = Vector2(157, 111)
 
 [node name="relay7" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-313, 5)
+position = Vector2(-306, -53)
 
 [node name="relay11" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-381, -59)
 
-[node name="Relay15" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-287, 92)
-
 [node name="relay12" parent="." instance=ExtResource("1_4287h")]
 position = Vector2(-224, -1)
 
-[node name="relay14" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-136, 18)
-
 [node name="relay21" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-176, -231)
+position = Vector2(-3, -216)
 
-[node name="relay24" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-231, -183)
+[node name="relay22" parent="." instance=ExtResource("1_4287h")]
+position = Vector2(-377, -168)
 
 [node name="generator" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(-429, -112)
@@ -55,16 +50,16 @@ position = Vector2(-429, -112)
 position = Vector2(71, 115)
 
 [node name="generator3" parent="." instance=ExtResource("3_q68f6")]
-position = Vector2(-110, -205)
+position = Vector2(-74, -197)
 
 [node name="generator2" parent="." instance=ExtResource("3_q68f6")]
-position = Vector2(-269, 158)
+position = Vector2(-246, 72)
 
 [node name="turret2" parent="." instance=ExtResource("4_pvicg")]
-position = Vector2(-78, 3)
+position = Vector2(-335, -230)
 
 [node name="turret3" parent="." instance=ExtResource("4_pvicg")]
-position = Vector2(-320, -195)
+position = Vector2(73, -233)
 
 [node name="gameview" parent="." instance=ExtResource("5_425xm")]
 position = Vector2(-115, -30)
@@ -76,7 +71,7 @@ position = Vector2(65, -84)
 position = Vector2(277, -94)
 
 [node name="brute2" parent="." instance=ExtResource("9_jemf0")]
-position = Vector2(160, -111)
+position = Vector2(-344, -436)
 
 [node name="brute" parent="." instance=ExtResource("9_jemf0")]
-position = Vector2(92, -258)
+position = Vector2(-511, -416)

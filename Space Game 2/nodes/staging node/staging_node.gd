@@ -13,6 +13,8 @@ var RequestForm = {
 	"Couriers":[]
 	}
 
+var connectables = []
+
 @onready var PowerGoal = matureNodeData.PowerToBuild
 @onready var ConnectionRange = matureNodeData.ConnectionRange
 @onready var progressbar = $ColorRect/ProgressBar
@@ -20,11 +22,15 @@ var RequestForm = {
 @onready var collision = $Collision
 @onready var connector = $Connector
 @onready var connectorshape = $Connector/CollisionShape2D
+@onready var linegraphicshape = $LineGraphicArea/CollisionShape2D
 
 func _ready():
+	
+	
 	modulate.a = 100
 	progressbar.max_value = PowerGoal
 	connectorshape.shape.radius = ConnectionRange
+	linegraphicshape.shape.radius = ConnectionRange
 
 func _process(delta):
 	if isSelectingLocation:
@@ -36,10 +42,15 @@ func _staging_process():
 	if Input.is_action_just_pressed("LMB"):
 		isSelectingLocation = false
 		groundSelf()
+	elif Input.is_action_just_pressed("RMB"):
+		queue_free()
 
 func _draw():
 	if isSelectingLocation:
-		draw_circle(get_local_mouse_position(), ConnectionRange, Color.STEEL_BLUE)
+		for i in connectables.size():
+			draw_line(Vector2(0,0), to_local(connectables[i].global_position), Color.AQUAMARINE, 4)
+			print(connectables)
+		#draw_circle(get_local_mouse_position(), ConnectionRange, Color.STEEL_BLUE)
 
 func groundSelf():
 	
@@ -48,6 +59,7 @@ func groundSelf():
 	connector.monitoring = true
 	collision.monitorable = true
 	collision.monitoring = true
+	NavBus.add_point_to_nav(self)
 	timer.start()
 
 func getPower():
@@ -105,3 +117,12 @@ func completeNode():
 func _on_timer_timeout():
 	
 	getPower()
+
+
+func _on_line_graphic_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("collider"):
+		connectables.append(area.get_parent())
+
+func _on_line_graphic_area_area_exited(area: Area2D) -> void:
+	if connectables.has(area.get_parent()):
+		connectables.erase(area.get_parent())

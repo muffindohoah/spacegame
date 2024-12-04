@@ -39,7 +39,7 @@ turbulence_initial_displacement_max = 1.49012e-06
 [sub_resource type="CircleShape2D" id="CircleShape2D_hfmhl"]
 radius = 92.1954
 
-[node name="brute" type="CharacterBody2D"]
+[node name="brute" type="CharacterBody2D" groups=["enemy"]]
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_q4bxm")

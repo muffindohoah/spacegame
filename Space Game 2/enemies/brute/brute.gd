@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-
+const HEALTH = 5
 const SPEED = 90.0
+var health = HEALTH
 var current_target: set = set_current_target
 var targets = []
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
@@ -17,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	$RemoteTransform2D.global_rotation = lerp_angle($RemoteTransform2D.global_rotation, target_direction, .05)
 	
 	var new_velocity = global_position.direction_to(nav_agent.get_next_path_position()) * SPEED
-	print(new_velocity)
+	#print(new_velocity)
 	nav_agent.velocity = new_velocity
 	
 	move_and_slide()
@@ -26,7 +27,7 @@ func set_current_target(new_target):
 	current_target = new_target
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	print(safe_velocity, "SAFE")
+	#print(safe_velocity, "SAFE")
 	velocity = safe_velocity
 
 
@@ -36,6 +37,13 @@ func generate_path(global_vec2):
 	
 	#print(nav_agent.target_position, nav_agent.get_final_position(), nav_agent.get_next_path_position())
 
+func hit(damage):
+	health -= damage
+	if health <= 0:
+		death()
+
+func death():
+	queue_free()
 
 func get_target_position():
 	if current_target:

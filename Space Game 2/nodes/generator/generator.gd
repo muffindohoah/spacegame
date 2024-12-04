@@ -5,6 +5,7 @@ func _physics_process(delta):
 
 func _on_timer_timeout():
 	updateDistances()
+	
 
 func _on_generate_power_timeout():
 	StoredPower += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqtc13uqjsv45"]
+[gd_scene load_steps=11 format=3 uid="uid://dqtc13uqjsv45"]
 
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="1_ikl35"]
 [ext_resource type="Script" path="res://nodes/turret/turret.gd" id="1_wcu16"]
@@ -10,6 +10,46 @@ radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qupdj"]
 size = Vector2(40, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xptlu"]
+radius = 145.003
+
+[sub_resource type="Animation" id="Animation_run8p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.445]
+}
+
+[sub_resource type="Animation" id="Animation_6jhxe"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2),
+"transitions": PackedFloat32Array(1, 3.73214, 0.164939),
+"update": 0,
+"values": [0.26, 8.445, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byp2q"]
+_data = {
+"RESET": SubResource("Animation_run8p"),
+"shoot": SubResource("Animation_6jhxe")
+}
 
 [node name="turret" type="Node2D" groups=["node", "taker"]]
 script = ExtResource("1_wcu16")
@@ -39,7 +79,27 @@ position = Vector2(0, 0.250002)
 scale = Vector2(2.875, 4.15625)
 texture = ExtResource("4_muvje")
 
+[node name="DetectionArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_xptlu")
+
+[node name="ShotCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [node name="Pivot" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Pivot"]
+points = PackedVector2Array(144, 0, 0, 0)
+closed = true
+width = 8.445
+default_color = Color(0.34, 1, 0.461, 1)
+joint_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 2
+round_precision = 5
 
 [node name="barrel" type="ColorRect" parent="Pivot"]
 offset_left = -6.0
@@ -48,8 +108,14 @@ offset_right = 35.0
 offset_bottom = 5.0
 color = Color(0.91, 0.4004, 0.408893, 1)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_byp2q")
+}
+
 [connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
 [connection signal="timeout" from="PowerTimer" to="." method="_on_power_timer_timeout"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
 
 [editable path="Connector"]
 [editable path="Collision"]

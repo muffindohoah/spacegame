@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci8vg0aqpbsvf"]
+[gd_scene load_steps=10 format=3 uid="uid://ci8vg0aqpbsvf"]
 
 [ext_resource type="Script" path="res://nodes/staging node/staging_node.gd" id="1_p3fdh"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_ipa7r"]
@@ -16,6 +16,8 @@ bg_color = Color(0.22425, 0.161, 0.23, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh5b8"]
 bg_color = Color(0.3224, 0.496, 0.62, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4v8u"]
 
 [node name="stagingNode" type="Node2D" groups=["node", "taker"]]
 script = ExtResource("1_p3fdh")
@@ -61,8 +63,17 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_yh5b8")
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="LineGraphicArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LineGraphicArea"]
+shape = SubResource("CircleShape2D_a4v8u")
+debug_color = Color(0.83, 0.235167, 0, 0.6)
+
 [connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="LineGraphicArea" to="." method="_on_line_graphic_area_area_entered"]
+[connection signal="area_exited" from="LineGraphicArea" to="." method="_on_line_graphic_area_area_exited"]
 
 [editable path="Connector"]
 [editable path="Collision"]

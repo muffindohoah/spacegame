@@ -11,13 +11,22 @@ var Powered = 0
 	"From":self,
 	"To":"Power",
 	"Power":1,
+	"Map:":null,
 	"PowerParent":null,
 	"ParentGateway":null,
 	"Couriers":[]
 	}
 
-func _ready():
+func _ready() -> void:
+	NavBus.add_node_to_nav(self)
+	var PowerTimerInstance = Timer.new()
+	PowerTimerInstance.name = "PowerTimer"
+	PowerTimerInstance.wait_time = PowerFrequency
+	add_child(PowerTimerInstance)
 	Utils.Demanders.append(self)
+	
+	if !RequestForm.PowerParent:
+		RequestForm.PowerParent = NavBus.get_closest_node(self, NavBus.get_givers())
 
 func getPower():
 	if StoredPower > 0:
@@ -30,12 +39,15 @@ func receive(data):
 	StoredPower += data.Power
 
 func requestPower():
+	RequestForm.Map = NavBus.get_node_path(self, RequestForm.PowerParent)
+	print(NavBus.get_node_path(self, RequestForm.PowerParent))
+	print(self, RequestForm.PowerParent)
 	RequestForm.Couriers.clear()
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i] != null:
 			if ConnectedNodes[i].is_in_group("relay") or ConnectedNodes[i].is_in_group("power"):
 				
-				ConnectedNodes[i].call_deferred("send", RequestForm)
+				ConnectedNodes[i].send(RequestForm)
 				
 
 func deadEnd(from):
