@@ -59,7 +59,7 @@ func groundSelf():
 	connector.monitoring = true
 	collision.monitorable = true
 	collision.monitoring = true
-	NavBus.add_point_to_nav(self)
+	NavBus.add_node_to_nav(self)
 	timer.start()
 
 func getPower():
@@ -72,6 +72,12 @@ func getPower():
 	
 
 func requestPower():
+
+	if !RequestForm.PowerParent:
+		RequestForm.PowerParent = NavBus.get_closest_node(self, NavBus.get_givers())
+		
+
+	RequestForm.Map = NavBus.get_node_path(self, RequestForm.PowerParent)
 	
 	for i in ConnectedNodes.size():
 		if !ConnectedNodes[i] == null:

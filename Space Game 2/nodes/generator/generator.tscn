@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlnfaliclscl4"]
 
-[ext_resource type="Script" path="res://nodes/generator/generator.gd" id="1_c42q0"]
+[ext_resource type="Script" uid="uid://bjlk3nryklnjs" path="res://nodes/generator/generator.gd" id="1_c42q0"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_1ishe"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_1uxid"]
 

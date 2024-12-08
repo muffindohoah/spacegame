@@ -10,10 +10,10 @@ extends BasicNode
 }
 
 func _ready():
-	NavBus.add_node_to_nav(self)
 	Utils.WebChanged.connect(updateDistances)
 	Utils.Suppliers.append(self)
 	updateDistances()
+	NavBus.add_node_to_nav(self)
 
 func send(data):
 	returnRequest(data)

@@ -22,7 +22,6 @@ func _powered_process():
 	$Pivot.rotation = lerp_angle($Pivot.rotation, get_angle_to(focusAsteroid.position), 0.01)
 
 func findAsteroid():
-	print(ConnectedNodes)
 	if ConnectedNodes.find("Asteroid"):
 		for i in ConnectedNodes.size():
 			if ConnectedNodes[i] != null && ConnectedNodes[i].is_in_group("asteroid"):

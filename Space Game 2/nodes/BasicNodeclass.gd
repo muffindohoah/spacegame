@@ -24,10 +24,10 @@ func pulse_wire(connectedto):
 		
 		if ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == self and ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == connectedto:
 			ConnectedWires[i].pulse()
-			
+
 
 func connectNode(node):
-	print(ConnectedNodes, node)
+	print("CN", self, ConnectedNodes, node)
 	if !node == null:
 		if !ConnectedNodes.has(node):
 			var WireScene = load("res://nodes/wire/wire.tscn").instantiate()
@@ -37,6 +37,7 @@ func connectNode(node):
 			ConnectedWires.append(WireScene)
 			ConnectedNodes.append(node)
 			node.connectNode(self)
+			print("SC",self, node)
 			NavBus.connect_nodes(self, node)
 			
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="nodeDB" load_steps=3 format=3 uid="uid://cncgprf6guyih"]
 
 [ext_resource type="PackedScene" uid="uid://dlnfaliclscl4" path="res://nodes/generator/generator.tscn" id="1_38jrc"]
-[ext_resource type="Script" path="res://nodes/nodeDB.gd" id="2_6gopo"]
+[ext_resource type="Script" uid="uid://dtvhm07sn7opg" path="res://nodes/nodeDB.gd" id="2_6gopo"]
 
 [resource]
 script = ExtResource("2_6gopo")

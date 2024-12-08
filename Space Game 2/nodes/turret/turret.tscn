@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dqtc13uqjsv45"]
 
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="1_ikl35"]
-[ext_resource type="Script" path="res://nodes/turret/turret.gd" id="1_wcu16"]
+[ext_resource type="Script" uid="uid://bknn1vemrjx8u" path="res://nodes/turret/turret.gd" id="1_wcu16"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="2_iccs0"]
 [ext_resource type="Texture2D" uid="uid://cfon2trqh4c3k" path="res://addons/sprite_painter/graphics/rect_shape_2d.svg" id="4_muvje"]
 
@@ -47,8 +47,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_byp2q"]
 _data = {
-"RESET": SubResource("Animation_run8p"),
-"shoot": SubResource("Animation_6jhxe")
+&"RESET": SubResource("Animation_run8p"),
+&"shoot": SubResource("Animation_6jhxe")
 }
 
 [node name="turret" type="Node2D" groups=["node", "taker"]]
@@ -110,7 +110,7 @@ color = Color(0.91, 0.4004, 0.408893, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_byp2q")
+&"": SubResource("AnimationLibrary_byp2q")
 }
 
 [connection signal="area_entered" from="Connector" to="." method="_on_connector_area_entered"]

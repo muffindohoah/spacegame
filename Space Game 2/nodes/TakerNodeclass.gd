@@ -25,8 +25,6 @@ func _ready() -> void:
 	add_child(PowerTimerInstance)
 	Utils.Demanders.append(self)
 	
-	if !RequestForm.PowerParent:
-		RequestForm.PowerParent = NavBus.get_closest_node(self, NavBus.get_givers())
 
 func getPower():
 	if StoredPower > 0:
@@ -39,9 +37,11 @@ func receive(data):
 	StoredPower += data.Power
 
 func requestPower():
+	if !RequestForm.PowerParent:
+		RequestForm.PowerParent = NavBus.get_closest_node(self, NavBus.get_givers())
+		
+
 	RequestForm.Map = NavBus.get_node_path(self, RequestForm.PowerParent)
-	print(NavBus.get_node_path(self, RequestForm.PowerParent))
-	print(self, RequestForm.PowerParent)
 	RequestForm.Couriers.clear()
 	for i in ConnectedNodes.size():
 		if ConnectedNodes[i] != null:
@@ -51,7 +51,6 @@ func requestPower():
 				
 
 func deadEnd(from):
-	print(RequestForm.PowerParent, from)
 	
 	if RequestForm.PowerParent == from:
 		

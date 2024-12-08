@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvr5i4pa7rin"]
 
-[ext_resource type="Script" path="res://nodes/miner/miner.gd" id="1_00886"]
+[ext_resource type="Script" uid="uid://bnspxrhik5xuf" path="res://nodes/miner/miner.gd" id="1_00886"]
 [ext_resource type="PackedScene" uid="uid://c24o1xroe8oes" path="res://nodes/connector.tscn" id="2_27klw"]
 [ext_resource type="PackedScene" uid="uid://pa85rsijh4bm" path="res://nodes/collision.tscn" id="3_5glb6"]
 

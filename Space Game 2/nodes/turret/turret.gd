@@ -15,7 +15,6 @@ func _physics_process(delta):
 	
 	if StoredPower >= PoweredThreshold:
 		Powered = 1
-		print(NavBus.get_closest_node(self, NavBus.get_givers()))
 	else:
 		Powered = 0
 	

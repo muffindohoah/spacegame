@@ -17,7 +17,6 @@ func _ready():
 func send(data):
 	
 	for i in ConnectedNodes.size():
-		print(data.From, data.Map)
 		if data.Map.has(self):
 			var handoff_node = data.Map[data.Map.find(self) + 1]
 			if ConnectedNodes.has(handoff_node) && handoff_node != data.From:
@@ -28,10 +27,8 @@ func send(data):
 
 func pulse_wire(connectedto):
 	for i in ConnectedWires.size():
-		print("GAY")
 		if ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == self and ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == connectedto:
 			ConnectedWires[i].pulse()
-			print("GAY")
 
 func _on_connector_area_entered(area):
 	var prospectiveNode = area.get_parent()
