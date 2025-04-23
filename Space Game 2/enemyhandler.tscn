@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bm2c1bpf1hunq" path="res://enemies/debug/Crosshairs_Red.svg.png" id="3_r6bet"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2lax0"]
-radius = 116.155
+radius = 179.101
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f23up"]
 shader = ExtResource("2_2lax0")
@@ -18,10 +18,10 @@ shader_parameter/opacity = 0.674
 script = ExtResource("1_nlf5r")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 25.0
+wait_time = 32.891
 
 [node name="Area2D" type="Area2D" parent="."]
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_2lax0")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://cadbn8wpury8d"]
+
+[ext_resource type="Script" uid="uid://b2t1wcuqb7m1w" path="res://ui/mainmenu.gd" id="1_0y3v4"]
+[ext_resource type="Texture2D" uid="uid://dhxca7ev7x72f" path="res://ui/spaceshit.png" id="1_016uc"]
+
+[node name="mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0y3v4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -647.0
+offset_top = -406.0
+offset_right = 1273.0
+offset_bottom = 674.0
+texture = ExtResource("1_016uc")
+flip_h = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 470.0
+offset_right = 635.0
+offset_bottom = 535.0
+theme_override_font_sizes/font_size = 41
+text = "PLAY"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 176.0
+offset_right = 726.0
+offset_bottom = 240.0
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/font_size = 46
+text = "SPACE GAME"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

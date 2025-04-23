@@ -4,14 +4,17 @@ extends Node2D
 const RANGE = 500
 
 func _ready() -> void:
+	$Area2D.monitoring = true
 	position = Vector2(randi()%RANGE, randi()%RANGE)
 	startwavetimer()
 
 func _process(delta: float) -> void:
+	
 	$Label.text = "INBOUND:"+str(waittimer.time_left)
 
 func startwavetimer():
 	waittimer.start()
+	
 
 
 func _on_timer_timeout() -> void:
@@ -29,4 +32,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	position = Vector2(randi()%RANGE, randi()%RANGE)
+	if area.get_parent().is_in_group("collider"):
+		
+		print("GAYY")
+		position = Vector2(randi()%RANGE, randi()%RANGE)

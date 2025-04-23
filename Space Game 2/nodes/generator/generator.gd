@@ -8,4 +8,4 @@ func _on_timer_timeout():
 	
 
 func _on_generate_power_timeout():
-	StoredPower += 1
+	StoredPower += 2

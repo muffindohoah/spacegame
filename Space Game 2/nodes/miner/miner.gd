@@ -18,8 +18,9 @@ func _physics_process(delta):
 		_powered_process()
 
 func _powered_process():
-	
-	$Pivot.rotation = lerp_angle($Pivot.rotation, get_angle_to(focusAsteroid.position), 0.01)
+	if !focusAsteroid == null:
+		
+		$Pivot.rotation = lerp_angle($Pivot.rotation, get_angle_to(focusAsteroid.position), 0.01)
 
 func findAsteroid():
 	if ConnectedNodes.find("Asteroid"):
