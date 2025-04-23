@@ -86,6 +86,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_xptlu")
 
 [node name="ShotCooldown" type="Timer" parent="."]
+wait_time = 0.3
 one_shot = true
 autostart = true
 

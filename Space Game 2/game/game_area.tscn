@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://b067cv2jqyfww"]
+[gd_scene load_steps=10 format=3 uid="uid://b067cv2jqyfww"]
 
 [ext_resource type="Script" uid="uid://q54s4pqqq10d" path="res://game/game_area.gd" id="1_83rih"]
 [ext_resource type="PackedScene" uid="uid://dsthu86g5vuve" path="res://nodes/relay/relay.tscn" id="1_4287h"]
+[ext_resource type="PackedScene" uid="uid://dt6lrqakqh71m" path="res://enemyhandler.tscn" id="2_pqfop"]
 [ext_resource type="PackedScene" uid="uid://dlnfaliclscl4" path="res://nodes/generator/generator.tscn" id="3_q68f6"]
-[ext_resource type="PackedScene" uid="uid://dqtc13uqjsv45" path="res://nodes/turret/turret.tscn" id="4_pvicg"]
-[ext_resource type="PackedScene" uid="uid://dxsvihcew6epd" path="res://game/gameview.tscn" id="5_425xm"]
 [ext_resource type="PackedScene" uid="uid://dbb8g74m5lwf7" path="res://nodes/asteroid/asteroid.tscn" id="6_px3bf"]
 [ext_resource type="PackedScene" uid="uid://x4k3xph04y4f" path="res://game/background.tscn" id="7_jucmn"]
 [ext_resource type="PackedScene" uid="uid://bkipiyxhl5qk0" path="res://ui/inspector/inspector.tscn" id="8_shgor"]
-[ext_resource type="PackedScene" uid="uid://dm4mr6wcb1npx" path="res://enemies/brute/brute.tscn" id="9_jemf0"]
+[ext_resource type="PackedScene" uid="uid://dxsvihcew6epd" path="res://game/gameview.tscn" id="9_8nvqf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nr2tk"]
 vertices = PackedVector2Array(3886, 2404.88, -3650.15, 2317.12, -3277.75, -2239.3, 3886, -2480.66)
@@ -18,72 +17,27 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-3287, -2249, 3896, -24
 [node name="GameArea" type="Node2D"]
 script = ExtResource("1_83rih")
 
+[node name="enemyhandler" parent="." instance=ExtResource("2_pqfop")]
+position = Vector2(-858, 255)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_nr2tk")
 
 [node name="Background" parent="." instance=ExtResource("7_jucmn")]
-position = Vector2(-152, -225)
+position = Vector2(-311, -373)
 
 [node name="relay4" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(157, 111)
-
-[node name="relay7" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-306, -53)
-
-[node name="relay11" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-381, -59)
-
-[node name="relay12" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-224, -1)
-
-[node name="relay21" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-2, -205)
-
-[node name="relay27" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-58, -483)
-
-[node name="relay26" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-170, -69)
-
-[node name="relay23" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(68, -273)
-
-[node name="relay22" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-386, -199)
-
-[node name="relay24" parent="." instance=ExtResource("1_4287h")]
-position = Vector2(-301, -226)
-
-[node name="generator" parent="." instance=ExtResource("3_q68f6")]
-position = Vector2(-429, -112)
+position = Vector2(145, 52)
 
 [node name="generator4" parent="." instance=ExtResource("3_q68f6")]
 position = Vector2(71, 115)
 
-[node name="generator3" parent="." instance=ExtResource("3_q68f6")]
-position = Vector2(-42, -148)
-
-[node name="generator2" parent="." instance=ExtResource("3_q68f6")]
-position = Vector2(-246, 72)
-
-[node name="turret2" parent="." instance=ExtResource("4_pvicg")]
-position = Vector2(-220, -291)
-
-[node name="turret1" parent="." instance=ExtResource("4_pvicg")]
-position = Vector2(146, -296)
-
-[node name="gameview" parent="." instance=ExtResource("5_425xm")]
-position = Vector2(-115, -30)
-
 [node name="Asteroid" parent="." instance=ExtResource("6_px3bf")]
-position = Vector2(65, -84)
+position = Vector2(168, 184)
 
 [node name="Inspector" parent="." instance=ExtResource("8_shgor")]
 position = Vector2(277, -94)
 
-[node name="brute2" parent="." instance=ExtResource("9_jemf0")]
-position = Vector2(-344, -436)
-
-[node name="brute" parent="." instance=ExtResource("9_jemf0")]
-position = Vector2(-511, -416)
+[node name="gameview" parent="." instance=ExtResource("9_8nvqf")]
+position = Vector2(0, 0)

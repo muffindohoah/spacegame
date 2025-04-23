@@ -27,6 +27,8 @@ func send(data):
 
 func pulse_wire(connectedto):
 	for i in ConnectedWires.size():
+		if ConnectedWires[i] == null:
+			return
 		if ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == self and ConnectedWires[i].WiredTo or ConnectedWires[i].WiredFrom == connectedto:
 			ConnectedWires[i].pulse()
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cy1x871ulenga"]
 
-[ext_resource type="Script" path="res://ui/nodeUIelement.gd" id="1_43l0w"]
+[ext_resource type="Script" uid="uid://bsl6ue8kqwl8j" path="res://ui/nodeUIelement.gd" id="1_43l0w"]
 [ext_resource type="Texture2D" uid="uid://drjoeyt7e6kwg" path="res://addons/sprite_painter/graphics/diamond_shape_2d.svg" id="1_c321o"]
 
 [node name="BaseButton" type="Button"]

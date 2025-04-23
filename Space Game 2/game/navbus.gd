@@ -60,6 +60,8 @@ func get_node_path(nodefrom, nodeto):
 	return node_path
 
 func get_closest_node(nodefrom, nodearray):
+	if nodearray.size()==0:
+		return
 	var fit_node = nodearray[0]
 	var reachable_nodes = {}
 	

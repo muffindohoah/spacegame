@@ -11,10 +11,12 @@ extends Node
 var Suppliers = []
 var Demanders = []
 
+signal WaveTimerStart(timernode, time)
 signal NodeSelected (node, isStaging : bool)
 signal WebChanged()
 signal ScoreChanged()
 
+var Wave = 1
 var SpaceRocks = 20 : set = SpaceRocksSet
 var SelectedNode = null
 

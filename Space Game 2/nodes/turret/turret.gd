@@ -2,7 +2,7 @@ extends TakerNode
 
 var spinSpeed = 1.5
 var targets = []
-var shotCooldown = 1 : set = set_shot_cooldown
+var shotCooldown = 0.3 : set = set_shot_cooldown
 var damage = 1
 
 func set_shot_cooldown(new):

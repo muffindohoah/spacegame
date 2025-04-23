@@ -6,6 +6,7 @@ var health = HEALTH
 var current_target: set = set_current_target
 var targets = []
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var hitbox = $Area2D2
 
 func _ready() -> void:
 	_on_timer_timeout()
@@ -28,7 +29,8 @@ func set_current_target(new_target):
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	#print(safe_velocity, "SAFE")
-	velocity = safe_velocity
+	velocity += safe_velocity * 0.5
+	velocity *= 0.8
 
 
 func generate_path(global_vec2):
@@ -69,3 +71,13 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_navigation_agent_2d_target_reached() -> void:
 	pass # Replace with function body.
+
+
+func _on_area_2d_2_area_entered(area: Area2D) -> void:
+	if area.is_in_group("collider"):
+		var knockback = self.velocity.normalized()
+		knockback = -knockback *1000
+		velocity += knockback
+		print("happeningsss")
+		area.get_parent().hit()
+	

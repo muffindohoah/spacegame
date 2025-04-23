@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm4mr6wcb1npx"]
+[gd_scene load_steps=10 format=3 uid="uid://dm4mr6wcb1npx"]
 
 [ext_resource type="Script" uid="uid://col8a6b2fdxxv" path="res://enemies/brute/brute.gd" id="1_q4bxm"]
 [ext_resource type="Texture2D" uid="uid://b87d0axjdgt8l" path="res://assets/enemies/fume.png" id="2_xmwhf"]
@@ -38,6 +38,9 @@ turbulence_initial_displacement_max = 1.49012e-06
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hfmhl"]
 radius = 92.1954
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwbf7"]
+size = Vector2(40, 8)
 
 [node name="brute" type="CharacterBody2D" groups=["enemy"]]
 motion_mode = 1
@@ -81,8 +84,16 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_hfmhl")
 
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_cwbf7")
+debug_color = Color(0.965108, 0, 0.488705, 0.42)
+
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="Area2D2" to="." method="_on_area_2d_2_area_entered"]

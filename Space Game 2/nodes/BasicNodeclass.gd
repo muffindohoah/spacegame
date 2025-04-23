@@ -2,10 +2,15 @@ class_name BasicNode
 
 extends Node2D
 
+@export var Health = 3
 @export var StoredPower = 0
 
 var ConnectedNodes = []
 var ConnectedWires = []
+
+func _process(delta: float) -> void:
+	if Health <= 0:
+		destroy()
 
 func send(data):
 	
@@ -40,7 +45,6 @@ func connectNode(node):
 			print("SC",self, node)
 			NavBus.connect_nodes(self, node)
 			
-
 	else:
 		print("duplicate node connection", node)
 
@@ -50,3 +54,12 @@ func disconnectNode(node):
 		NavBus.disconnect_nodes(self, node)
 	else:
 		print("invalid node disconnection")
+
+func hit():
+	Health -= 1
+
+func destroy():
+	for node in ConnectedNodes:
+		disconnectNode(node)
+		
+	queue_free()

@@ -4,15 +4,30 @@ extends CanvasLayer
 @onready var selectableNodesContainer = $Root/selectPanel/selectableNodes
 @onready var AnimPlayer = $AnimationPlayer
 @onready var scoreLabel = $Label
+@onready var waveLabel = $wavecounter
 
 var isPanel = false : set = panelSet
+var isCounting = false
+var waveTimer
 
 func _ready():
 	AnimPlayer.play("RESET")
 	Utils.ScoreChanged.connect(updateUI)
+	Utils.WaveTimerStart.connect(startCountdown)
 	
 	spawnNodeUI()
 	updateUI()
+
+func _process(delta: float) -> void:
+	if isCounting:
+		
+		if waveTimer.time_left() == 0:
+			isCounting = false
+			AnimPlayer.play("presentwave")
+			waveLabel.text = Utils.Wave
+
+func startCountdown(timernode, time):
+	AnimPlayer.play("presenttime")
 
 func updateUI():
 	scoreLabel.text = "Rocks: " + str(Utils.SpaceRocks)
